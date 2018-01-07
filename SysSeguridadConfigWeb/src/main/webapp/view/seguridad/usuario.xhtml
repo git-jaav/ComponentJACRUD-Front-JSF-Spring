@@ -1,0 +1,219 @@
+<ui:composition template="/templates/TemplateGeneral.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+ 
+ 	
+ 
+	<ui:define name="contentBread">
+		
+			<li class="current" >
+			<a class="estiloLabelForm"
+				href="#{facesContext.externalContext.requestContextPath}/view/seguridad/usuario.jsf">
+				Usuario
+			</a>
+			</li>
+			<p:outputPanel id="FormHeader">
+			<li class="current" id="liRegistro" style="display: #{sysUsuarioMBean.visibleRegistro ?'block':'none'} ;">
+				<a href="#" class="estiloLabelForm" >
+					#{lbv.REGISTRO_CAP}:#{sysUsuarioMBean.MODO_ACTUAL}
+				</a>			
+			</li>
+			</p:outputPanel>
+	</ui:define>
+
+	<ui:define name="contentEspecifico">
+			 	 
+		
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/validaciones.js" />
+		<script type="text/javascript"	src="#{request.contextPath}/resources/js/primefaces-calendar.js" />
+
+		<h:form id="FormUsuario">
+
+			<p:remoteCommand name="inicializar" update="@form" actionListener="#{sysUsuarioMBean.inicializar()}" />
+
+			<p:messages id="messages" globalOnly="true" autoUpdate="true" closable="true" />
+			<p:tooltip></p:tooltip>
+			<p:blockUI block="FormUsuario" widgetVar="blockElem" id="blockElem" 
+				trigger="btnNuevo btnBuscar dtElemTable">
+				#{mensaje.MSJ_BLOCKUI_Proceso}<br />
+				<p:graphicImage value="/resources/images/loader03.gif" />
+			</p:blockUI>
+
+
+			<p:outputPanel id="seccionMain"  rendered="#{!sysUsuarioMBean.visibleRegistro}">
+				<p:panel toggleable="true" header="Usuarios" collapsed="false">
+
+					<!-- MODELO HEAD TOOL SIN TOOLBAR-->
+					<div class="customHr">.</div>
+					<div  class="row"  align="center"  >
+						<div class="ui-g-12 ui-g-nopad">
+							<div class="ui-fluid">
+								<p:panelGrid layout="grid" styleClass="ui-panelgrid-blank" columns="3"
+											 columnClasses="ui-grid-col-2,ui-grid-col-6,ui-grid-col-4"
+								>
+									<p:column>
+										<p:panelGrid  layout="grid" styleClass="ui-panelgrid-blank" columns="1" 
+											columnClasses="ui-grid-col-12"
+											>
+											<p:commandButton value="Buscar" icon="fa fa-search" 
+												id="btnBuscar" 
+												actionListener="#{sysUsuarioMBean.btnBuscar}"									
+												onstart="PF('dtElemTable').paginator.setPage(0);" update="dtElemTable" 
+												styleClass="btn-primary"
+												title="#{mensaje.MSJ_INFO_TIP_BUSCAR_MAIN}"
+											/>		
+										</p:panelGrid>
+									</p:column>
+									<p:column>
+										<p:spacer width="10" ></p:spacer>
+									</p:column>							
+									<p:column>
+										<p:panelGrid  layout="grid" styleClass="ui-panelgrid-blank" columns="2" 
+											columnClasses="ui-grid-col-8,ui-grid-col-4"
+											>	
+												<p:spacer width="1" ></p:spacer>												
+												<p:commandButton icon="fa fa-plus-square" type="submit"
+													id="btnNuevo" styleClass="btn-primary"
+													actionListener="#{sysUsuarioMBean.btnNuevo}"
+													rendered="true"
+													process="@form"
+													update="@form"
+													>
+												</p:commandButton>	
+										</p:panelGrid>
+									</p:column>
+								</p:panelGrid>						
+							</div>
+						</div>					
+					</div>
+					<div class="customHr">.</div>
+					
+					<div class="ui-g">
+						<div class="ui-g-12 ui-g-nopad">
+							<div class="ui-fluid">
+								<p:spacer height="10" width="20"></p:spacer>
+
+								<p:panelGrid id="pnlFiltros" layout="grid"
+									styleClass="ui-panelgrid-blank" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-4,,ui-grid-col-3,ui-grid-col-2">
+
+									<p:column>
+										<p:outputLabel for="itFiltroUsuario"
+											styleClass="estiloLabelForm"
+											value="#{lbv.USUARIO_CAP}:" />
+										<p:inputText id="itFiltroUsuario"
+											value="#{sysUsuarioMBean.perfilUsuarioFiltro.usuaUsuario}"
+											placeholder="#{lbv.USUARIO_CAP}"
+											appendTo="@(body)" tabindex="1" var="titulo">
+										</p:inputText> 
+									</p:column>
+
+									<p:column>
+										<p:outputLabel for="itFiltroNombre" value="#{lbv.USUARIO_NOMBREUSUARIO}" 
+											styleClass="estiloLabelForm" />
+										<p:inputText id="itFiltroNombre"
+											value="#{sysUsuarioMBean.perfilUsuarioFiltro.usuaNombre}"
+											placeholder="#{lbv.USUARIO_NOMBREUSUARIO}"
+											tabindex="2">
+										</p:inputText>
+									</p:column>
+									<p:column>
+										<p:outputLabel for="cmbEstados" value="#{lbv.ESTADO_CAP}"
+											styleClass="estiloLabelForm" />
+										<p:selectOneMenu id="cmbEstados"
+											value="#{sysUsuarioMBean.perfilUsuarioFiltro.usuaEstado}">
+											<p:ajax process="@form" />
+											<f:selectItem itemLabel="--Todos--" noSelectionOption="true" />
+											<f:selectItem itemLabel="Activo" itemValue="#{constant.ACTIVO}"  />
+											<f:selectItem itemLabel="Inactivo" itemValue="#{constant.INACTIVO}" />
+
+										</p:selectOneMenu>
+
+									</p:column>
+
+									<p:column>
+										<p:spacer height="10" width="10" />							
+									</p:column>
+
+								</p:panelGrid>
+
+							</div>
+						</div>
+					</div>
+				</p:panel>
+
+				<p:dataTable id="dtElemTable" var="vElemTable" lazy="true"
+					widgetVar="dtElemTable" value="#{sysUsuarioMBean.listaModelPrincipal}"
+					paginator="true" rows="10" selectionMode="single"
+					selection="#{sysUsuarioMBean.usuarioSeleccionado}"
+					rowKey="#{vElemTable.usuaId}" paginatorPosition="top"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					rowsPerPageTemplate="5, 10, 20, 50" rowIndexVar="index"
+					reflow="true" style="font-size:13px;"
+					emptyMessage="#{mensaje.MSJ_WARN_busquedaVacia}"
+					resizableColumns="true">					
+
+					<p:column headerText="#{lbv.N_CAP}" width="5%" >
+						<h:outputText value="#{index + 1}" />
+					</p:column>
+					<p:column headerText="#{lbv.USUARIO_CAP}" width="15%">
+						<h:outputText value="#{vElemTable.usuaUsuario}" />
+					</p:column>
+					<p:column headerText="#{lbv.USUARIO_NOMBREUSUARIO}" width="50%" >
+						<h:outputText value="#{vElemTable.usuaNombre}" />
+					</p:column>
+					<p:column headerText="#{lbv.ESTADO_CAP}" width="20%"  style="text-align:center; ">
+						<h:outputText value="#{vElemTable.usuaEstado eq constant.ACTIVO ? lbv.ACTIVO_CAP :lbv.INACTIVO_CAP}" 
+							styleClass="#{vElemTable.usuaEstado eq constant.ACTIVO ? 'colTableEstadoActivo' :'colTableEstadoInactivo'}"
+							style="font-weight:bold;" 
+							/>
+					</p:column>
+					<p:column headerText="Acciones"  style="width:120px; text-align:center; padding:1px;" >
+						<p:panelGrid layout="grid"
+							styleClass="sinpadding ui-panelgrid-blank" columns="2"
+							columnClasses="ui-grid-col-6,ui-grid-col-6">
+							<p:commandButton icon="fa fa-edit"
+								actionListener="#{sysUsuarioMBean.btnModificarElem(vElemTable)}" rendered="true"
+								styleClass="btn-primary" process="@form" type="submit"
+								style="width:25px; height: 30px;" update="@form"
+								title="#{mensaje.MSJ_INFO_TIP_MODIFICAR_MAIN}">
+
+							</p:commandButton>
+							<p:commandButton  icon="fa fa-eye"
+								actionListener="#{sysUsuarioMBean.btnVerElem(vElemTable)}" rendered="false"
+								styleClass="btn-primary" style="width:25px; height: 30px;"
+								process="@form" update="@form"
+								title="#{mensaje.MSJ_INFO_TIP_VER_MAIN}">
+
+							</p:commandButton>
+							<p:commandButton icon="fa fa-trash"
+								actionListener="#{sysUsuarioMBean.btnEliminarElem(vElemTable)}" rendered="true"
+								styleClass="btn-primary" style="width:25px; height: 30px;"
+								process="@form" update="@form"
+								title="#{mensaje.MSJ_INFO_TIP_ELIMINAR_MAIN}">
+							</p:commandButton>
+
+						</p:panelGrid>
+					</p:column>					
+				</p:dataTable>
+
+			</p:outputPanel>			
+			<p:outputPanel id="opSeccionReg" rendered="#{sysUsuarioMBean.visibleRegistro}" >				
+					<ui:include src="/view/seguridad/usuarioRegistro.xhtml">
+					</ui:include>
+			</p:outputPanel>			
+		</h:form>
+
+
+		<script>
+		jQuery(document).ready(function() {
+			//inicializar();
+		});
+	</script>
+
+
+	</ui:define>
+</ui:composition>

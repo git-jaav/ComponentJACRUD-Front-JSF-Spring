@@ -1,0 +1,75 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,600);
+meta.foundation-version{font-family:"/5.5.2/"}
+meta.foundation-mq-small{font-family:"/onlyscreen/";
+    width:0}meta.foundation-mq-small-only{font-family:"/onlyscreen and (max-width:40em)/";
+                width:0}meta.foundation-mq-medium{font-family:"/onlyscreen and (min-width:40.0625em)/";
+                                        width:40.0625em}meta.foundation-mq-medium-only{font-family:"/onlyscreen and (min-width:40.0625em) and (max-width:64em)/";
+                                                                                                width:40.0625em}
+meta.foundation-mq-large{font-family:"/onlyscreen and (min-width:64.0625em)/";
+    width:64.0625em}meta.foundation-mq-large-only{font-family:"/onlyscreen and (min-width:64.0625em) and (max-width:90em)/";
+                        width:64.0625em}meta.foundation-mq-xlarge{font-family:"/only screen and (min-width:90.0625em)/";width:90.0625em}
+meta.foundation-mq-xlarge-only{font-family:"/onlyscreen and (min-width:90.0625em) and (max-width:120em)/";width:90.0625em}
+meta.foundation-mq-xxlarge{font-family:"/onlyscreen and (min-width:120.0625em)/";
+    width:120.0625em}meta.foundation-data-attribute-namespace{font-family:false}
+html,body{height:100%}html{box-sizing:border-box}*,*:before,*:after{-webkit-box-sizing:inherit;-moz-box-sizing:inherit;box-sizing:inherit}html,body{font-size:100%}body{background:#FFFFFF;color:#222;cursor:auto;
+font-family:"OpenSans", sans-serif;font-style:normal;font-weight:normal;line-height:1.5;margin:0;padding:0;position:relative}a:hover{cursor:pointer}img{max-width:100%;height:auto}img{-ms-interpolation-mode:bicubic}#map_canvas
+img,#map_canvas embed,#map_canvas object,.map_canvas img,.map_canvas embed,.map_canvas
+object,.mqa-display img,.mqa-display embed,.mqa-display object{max-width:none !important}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

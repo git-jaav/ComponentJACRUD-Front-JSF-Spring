@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<HTML 
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html" locale="#{redireccionaMBean.lenguaje}" >
+	<h:head>
+		<f:facet name="first">			
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />		
+			<meta charset="utf-8"/>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+						
+			<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+			
+			<title>#{paramsys.TITLE}</title>
+		</f:facet>
+		<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.png']}"/>	
+
+		<!--=== CSS ===-->		
+		<link href="#{request.contextPath}/resources/personalizar/personalStylus.css" rel="stylesheet" type="text/css" />
+
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
+
+		<link rel="stylesheet"
+		  href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+
+		<!--=== CUSTOM JAAV ===-->
+		<link href="#{request.contextPath}/resources/personalizar/customJAAV.css" rel="stylesheet" type="text/css" />
+
+		<ui:insert name="head" />
+		<ui:insert name="head-end" />
+
+	</h:head>
+	<h:body styleClass="skin-blue sidebar-mini #{not empty sidebarCollapse and sidebarCollapse eq 'true' ? 'sidebar-collapse':''}">
+		<ui:insert name="body-begin" />		
+		
+
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="#{request.contextPath}/" class="logo" >
+					<span class="logo-mini">
+						<ui:insert name="logo-mini"/>
+					</span>
+					<span class="logo-lg">
+						<ui:insert name="logo-lg"/>
+					</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only"></span>
+					</a>
+					<div class="navbar-custom-menu" >
+						<ui:insert name="top-menu"/>
+					</div>
+				</nav>
+			</header>
+			<!-- side menú -->
+			
+			<aside class="main-sidebar" >
+				<ui:insert name="menu-begin"/>
+				<section class="sidebar">
+					<ui:insert name="menu"/>
+				</section>
+				<ui:insert name="menu-end"/>
+			</aside>
+			<!-- content -->
+			<div class="content-wrapper">
+				<ui:insert name="content-wrapper"/>
+				<section class="content-header" style="display:none;" >
+					<h1  >
+						<ui:insert name="title" />
+						<small><ui:insert name="description" /></small>
+					</h1>
+					<ui:insert name="content-header"/>
+				</section>
+				<section class="content" style="padding: 5px;" >
+					<ui:insert name="content-begin"/>
+					<ui:insert name="body" />
+				</section>
+				<ui:insert name="content-end"/>
+			</div>
+			<footer class="main-footer" style="padding: 5px;" >
+				<ui:insert name="footer"/>
+			</footer>
+			<!-- 
+			<h:form>
+				<p:remoteCommand name="clearBreadCrumbs" acíionLisíener="#{breadCrumbNB.clear}" process="@íhis" upda
+			</h:form>
+			-->
+		</div>
+		
+		<p:importConstants type="pe.jaav.sistemas.seguridadweb.util.Constant" var="constant" />
+		
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<h:outputScript library="js" name="bootstrap.min.js" target="head"/>
+		<h:outputScript library="js" name="admin-lte.min.js" target="head"/>
+		<h:outputScript library="js" name="admintemplate.js" target="head"/>
+	</h:body>
+</f:view>
+</HTML>
+ 

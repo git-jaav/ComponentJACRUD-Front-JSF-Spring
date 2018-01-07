@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+		<f:event listener="#{redireccionaMBean.inicializar}" type="preRenderView"  />
+</f:metadata>
+
+<h:head>
+	<title>#{label.TITLE}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+	
+	<style type="text/css">				
+		
+	</style>	
+</h:head>
+<h:body>
+	<div class="container-fluid" align="center">
+		<div class="container">
+			<section class="col-sm-12">		
+				<h:form id="preferenciasForm">					
+				
+					<div class="col-sm-6 col-sm-offset-3">
+						<p:fieldset styleClass="panel-principal">
+							<p:messages id="messages" globalOnly="false" autoUpdate="true" closable="true" />
+							<legend>Preferencias</legend>
+
+							<p:spacer></p:spacer>
+							<div class="form-group">
+								<div class="row" align="right">
+									<p:commandButton value="Aceptar" 
+										styleClass="btn btn-primary"
+										action="#{redireccionaMBean.ingresar}" 
+										type="submit"/>
+									<p:button value="Cancelar"
+										styleClass="btn btn-primary"   
+									 	outcome="logout"/>
+								</div>
+							</div>
+						</p:fieldset>
+					</div>
+				</h:form>
+			</section>
+		</div>
+	</div>
+	<script type="text/javascript">
+   			
+	</script>
+</h:body>
+
+</html>

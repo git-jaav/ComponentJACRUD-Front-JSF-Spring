@@ -1,0 +1,47 @@
+.fc-primefaces-input input{
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.fc-primefaces-input::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.fc-primefaces-input:-ms-input-placeholder {
+  color: #999;
+}
+.fc-primefaces-input::-webkit-input-placeholder {
+  color: #999;
+}
+.fc-primefaces-input::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+.fc-primefaces-input[disabled],
+.fc-primefaces-input[readonly],
+fieldset[disabled] .fc-primefaces-input {
+  background-color: #eee;
+  opacity: 1;
+}
+.fc-primefaces-input[disabled],
+fieldset[disabled] .fc-primefaces-input {
+  cursor: not-allowed;
+}
+
+.fc-jsf-selectonemenu select[multiple], select[size] { 
+  height: 34px;
+} 

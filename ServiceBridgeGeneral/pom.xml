@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>pe.jaav.sistemas</groupId>
+  <artifactId>ServiceBridgeGeneral</artifactId>
+  <version>1.0</version>
+  <name>ServiceBridgeGeneral</name>
+  
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>      	
+		<jdk.version>1.8</jdk.version>			
+		<spring.version>4.1.6.RELEASE</spring.version>				
+	</properties>  
+  <dependencies>
+  
+       <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>            
+        </dependency>  
+
+
+		<dependency>
+			<groupId>pe.jaav.common</groupId>
+			<artifactId>JACommon-UtilesJson</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>	
+
+		<dependency>
+			<groupId>pe.jaav.common</groupId>
+			<artifactId>JACommon-Utiles</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>			    
+	        		 
+		<dependency>
+			<groupId>pe.jaav.sistemas</groupId>
+			<artifactId>ModelSeguridadGeneral</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>	  
+  
+  </dependencies>
+	<build>
+		<finalName>${pom.artifactId}</finalName>
+		<plugins>
+			<!-- Maven compiler plugin -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>  
+	  
+</project>

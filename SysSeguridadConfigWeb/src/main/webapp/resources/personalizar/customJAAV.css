@@ -1,0 +1,445 @@
+/***BORDER GRD **
+
+	antes	#1c85b8
+	ahora	#00A65A
+*/
+
+.ui-datatable-odd {
+	background: #ffffff;
+}
+.ui-datatable-even {
+	background: #F2F5F9;
+}
+.highlight {
+	background: yellow !important;
+}
+.required-field{
+	background-color: #FBF9CF !important;		
+}
+.required-field .ui-selectonemenu-label{
+	background-color: #FBF9CF !important;
+	
+}
+.required-field .hasDatepicker{
+	background-color: #FBF9CF !important;
+}
+.required-field .ui-datalist-content{
+	background-color: #FBF9CF !important;
+	min-height:60px !important
+}
+.input-width{
+	width: 85% !important;
+}
+.input-width-seven{
+	width: 70% !important;
+}
+.input-width-medium{
+	width: 40% !important;
+}
+.input-width-small{
+	width: 20% !important;
+}	
+.footer-custom {
+	font-style:italic;
+	margin-bottom: 20px;
+}
+.colTableEstadoActivo{
+	
+	color: #284A89;
+}
+.colTableEstadoInactivo{
+	
+	color:#990000;
+}			
+.colTableStyleBlue01{
+	
+	color:#284A89;
+}
+.colTableStyleRed01{
+	
+	color:#990000;
+}			
+.colTableStyleGreen01{
+	
+	color:#097718;
+}				
+.colTableStyleYellow01{
+	
+	color:#C99934;
+}							
+.colTableStyleGray01{
+	
+	color:#232E35;
+}
+.colTableStyleRed02{
+	
+	color:#FF1010;
+}
+.colTableStyleOrange01{		
+	color:#E66108;
+}
+
+.uppercase{
+	text-transform: uppercase;
+}
+.foo-two-columns tbody tr td {
+	width : 50%;
+    vertical-align: top;
+    horizontal-align: left;
+}
+.foo tbody tr td {
+	vertical-align: top;
+	horizontal-align: left;
+}
+.inputTextStyle {
+	background-color: pink !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #1e68b8;
+  background-color: #2c5ba4;
+  border-color: #1e68b8;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.btn-primary .badge {
+  color: #0967b8;
+  background-color: #fff;
+}	
+
+
+.colTableStyleBlue01 .ui-selectonemenu-label{
+	font-weight:bold;	
+	color:#284A89;
+}
+.colTableStyleRed01 .ui-selectonemenu-label{
+	font-weight:bold;	
+	color:#990000;
+}	
+.colTableStyleGreen01 .ui-selectonemenu-label{
+	font-weight:bold;	
+	color:#097718;
+}
+.colTableStyleYellow01 .ui-selectonemenu-label{
+	font-weight:bold;	
+	color:#C99934;
+}	
+.colTableStyleGray01 .ui-selectonemenu-label{
+	font-weight:bold;	
+	color:#232E35;
+}
+.colTableStyleRed02 .ui-selectonemenu-label{
+	font-weight:bold;	
+	color:#FF1010;
+}
+
+.colTableStyleOrange01 .ui-selectonemenu-label{
+	font-weight:bold;	
+	color:#E66108;
+}
+
+.disabled-field{
+	background-color: #B3B395 !important;				
+}
+
+/*AGREGACIONES PORTAL*/
+/** BOTONES **/
+
+
+.btnRSCancel {
+  color: #fff;
+  display: inline-block;
+  padding: 2px 6px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+	background: #0081c2; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#0081c2, #096B9C); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#0081c2,  #096B9C); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#0081c2,  #096B9C); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#0081c2,  #096B9C); /* Standard syntax */  
+}
+
+.btnRSAcept {
+  color: #fff;
+  display: inline-block;
+  padding: 2px 6px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+	background: #02D581; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#02D581, #03E68B); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#02D581, #03E68B); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#02D581, #03E68B); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#02D581, #03E68B); /* Standard syntax */  
+}
+.btn-primaryRS {
+  	color: #fff;
+	border:1px solid #e93737;
+	background: #02D581; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#02D581, #03E68B); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#02D581, #03E68B); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#02D581, #03E68B); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#02D581, #03E68B); /* Standard syntax */
+}
+		
+	
+	
+	#Tabs ul {
+		padding: 0px;
+		margin: 0px;
+		margin-left: 0px;
+		list-style-type: none;
+	}
+	
+	#Tabs ul li {
+		display: inline-block;
+		clear: none;
+		float: left;
+		height: 24px;		
+	}
+	
+	#Tabs ul li a {
+		position: relative;
+		margin-top: 2px;
+		display: block;
+		margin-left: 6px;
+		line-height: 24px;
+		padding-left: 10px;
+		background: #f6f6f6;
+		z-index: 9999;
+		border: 1px solid #ccc;
+		border-bottom: 0px;
+		
+		/* The following four lines are to make the top left and top right corners of each tab rounded. */
+		-moz-border-radius-topleft: 4px;
+		border-top-left-radius: 4px;
+		-moz-border-radius-topright: 4px;
+		border-top-right-radius: 4px;
+		/* end of rounded borders */
+		
+		width: 130px;
+		color: #000000;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	#Tabs ul li a:hover {
+	text-decoration: underline;
+	}
+	
+	#Tabs #Content_Area {
+		padding: 0 0px;
+		clear:both;
+		overflow:hidden;
+		line-height:19px;
+		position: relative;
+		top: 5px;
+		z-index: 5;
+		height: 100%;
+		overflow: hidden;
+	}			
+		.lbMainheader {
+		    display: block;
+		    width: 100%;
+		    padding: 0;
+		    margin-bottom: 2px;
+		    font-size: 21px;
+		    line-height: inherit;
+		    color: #333;
+		    border: 0;
+		    border-bottom: 1px solid #e5e5e5;
+		}
+		.lbMainConten {			
+		    display: block;
+		    width: 100%;
+		    padding: 0;
+		    margin-bottom: 10px;
+		    font-size: 18px;
+		    line-height: inherit;
+		    color: #333;
+		    border: 0;
+		    font-weight:bold;	
+		    border-bottom: 1px solid #e5e5e5;
+		    padding-left: 2px;
+		}			
+		.lbConten {			
+		    display: block;
+		    width: 100%;
+		    padding: 0;
+		    margin-bottom: 2px;
+		    font-size: 16px;
+		    line-height: inherit;
+		    color: #333;
+		    border: 0;
+		    font-weight:normal;
+		    border-bottom: 1px solid #e5e5e5;
+		    padding-left: 20px;
+		}			
+					
+		.ui-confirm-dialog-message {
+		    display: block;
+		    width: 100%;
+		    padding: 0;
+		    margin-bottom: 2px;
+		    font-size: 18px;
+		    line-height: inherit;
+		    color: #333;
+		    border: 0;
+		    font-weight:normal;
+		    border-bottom: 1px solid #e5e5e5;
+		    padding-left: 20px;
+		}	
+		.customHr {
+		    width: 100%;
+		    font-size: 1px;
+		    color: #797979;
+		    line-height: 1px;
+		    background-color: #d2d6de;
+		}	
+		
+		.ui-datatable table {
+			border-collapse: collapse !important;
+			width: 100% !important;
+			table-layout: auto !important;
+		}	
+		.ui-datatable tfoot td {
+		    padding: 4px 10px;
+		    overflow: hidden;
+		    border-width: 1px;
+		    border-style: solid;
+		}
+		table {
+			display: table !important;
+			border-collapse: separate !important;
+			border-spacing: 2px !important;
+			border-color: black !important;
+		}
+		.ui-datatable tbody td {
+    		border-color: #14C676;
+		}
+
+		
+	.ui-fieldset, .ui-fieldset .ui-fieldset-legend {
+	    padding: .2em 1em;
+	        padding-top: 0.6em;
+	        padding-right: 1em;
+	        padding-bottom: 0.6em;
+	        padding-left: 1em;
+	}		
+
+	
+.colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    border-radius: 5px;
+    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}	
+
+.ui-dialog.ui-widget-content .ui-dialog-title {
+	font-size: 16px;
+}
+			
+.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+	height: 40px;
+}
+			
+.ui-dialog.ui-widget-content .ui-dialog-titlebar-close {
+  	margin-top: 0px;
+}
+
+.ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.textAreaNoResize textarea {
+	 resize: none;
+}
+
+.menuSelected {
+    background-color: #00E67E;
+}
+
+.estiloLabelForm{
+	font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+	font-style: normal ;
+	font-weight: normal;
+	color: #949494 !important;
+}		
+
+.estiloValueForm{
+	font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+	font-style: normal ;
+	font-weight: normal;
+	color: black !important;
+}
+		
+		
+.sinpadding [class*="col-"] {
+    padding: 0;
+}		

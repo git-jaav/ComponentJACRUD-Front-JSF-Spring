@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/TemplateMain.xhtml">
+
+	<style type="text/css">
+			.ui-widget-content {
+					    border: 1px solid rgba(192, 192, 192, 0.47);
+					    color: #000000;
+					    background-color: white;
+			}	
+	</style>
+
+    <ui:define name="head">
+        <title>#{paramsys.TITLE}</title>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+    	<p:graphicImage value="#{paramsys.PATH_IMAGE_SHOW}" height="35px" 
+    		style="padding-right:10px; padding-left:0px;" />
+      	
+        #{paramsys.NOMBRE_SISTEMA}
+    </ui:define>
+
+    <ui:define name="logo-mini">
+        #{paramsys.NOMBRE_SISTEMA}
+    </ui:define>
+
+    <ui:define name="top-menu">
+        <ui:include src="/includes/top-menu.xhtml"/>
+    </ui:define>
+    
+    <ui:define name="menu">
+		<ui:include src="/includes/left-menu.xhtml"/>
+     </ui:define>
+
+    <ui:define name="title">
+    </ui:define>
+
+    <ui:define name="description">        
+    </ui:define>
+
+	<ui:define name="content-header" >
+				
+	</ui:define>
+	
+	<ui:define name="content-begin" >
+		<h:form id="FormHeader">			
+			<ul class="breadcrumb" style="margin-bottom: 0px;">
+				<li><a href="#" class="estiloLabelForm"> <i
+						class="fa fa-calendar-plus-o"></i>
+						#{panelPrincipalMBean.lbFechaPrincipal}
+				</a></li>			
+				<li><a href="/"
+					class="estiloLabelForm" onclick="clearBreadCrumbs();"> <i
+						class="fa fa-home"></i> #{paramsys.PAR_OPCION_INICIO}
+					</a>
+				</li>			
+				<ui:insert name="contentBread"></ui:insert>				
+			</ul>			
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="body" >    	   	 	
+    	<ui:insert  name="contentEspecifico"></ui:insert>
+    </ui:define>
+
+
+    <ui:define name="footer">
+         <a target="_blank"
+           href="https://github.com/adminfaces/">
+            #{paramsys.COPYRIGHT} 
+        </a>
+        <div class="pull-right hidden-xs" style="color: gray">
+            <i>#{paramsys.VERSION} </i>
+        </div>
+    </ui:define>
+
+
+</ui:composition>
