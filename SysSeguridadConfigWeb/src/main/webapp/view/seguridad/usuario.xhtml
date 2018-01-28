@@ -127,8 +127,8 @@
 											value="#{sysUsuarioMBean.perfilUsuarioFiltro.usuaEstado}">
 											<p:ajax process="@form" />
 											<f:selectItem itemLabel="--Todos--" noSelectionOption="true" />
-											<f:selectItem itemLabel="Activo" itemValue="#{constant.ACTIVO}"  />
-											<f:selectItem itemLabel="Inactivo" itemValue="#{constant.INACTIVO}" />
+											<f:selectItem itemLabel="Activo" itemValue="#{constant.ACTIVO_db}"  />
+											<f:selectItem itemLabel="Inactivo" itemValue="#{constant.INACTIVO_db}" />
 
 										</p:selectOneMenu>
 
@@ -166,8 +166,8 @@
 						<h:outputText value="#{vElemTable.usuaNombre}" />
 					</p:column>
 					<p:column headerText="#{lbv.ESTADO_CAP}" width="20%"  style="text-align:center; ">
-						<h:outputText value="#{vElemTable.usuaEstado eq constant.ACTIVO ? lbv.ACTIVO_CAP :lbv.INACTIVO_CAP}" 
-							styleClass="#{vElemTable.usuaEstado eq constant.ACTIVO ? 'colTableEstadoActivo' :'colTableEstadoInactivo'}"
+						<h:outputText value="#{vElemTable.usuaEstado eq constant.ACTIVO_db ? lbv.ACTIVO_CAP :lbv.INACTIVO_CAP}" 
+							styleClass="#{vElemTable.usuaEstado eq constant.ACTIVO_db ? 'colTableEstadoActivo' :'colTableEstadoInactivo'}"
 							style="font-weight:bold;" 
 							/>
 					</p:column>
