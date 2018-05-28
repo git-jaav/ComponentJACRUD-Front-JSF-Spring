@@ -1,6 +1,9 @@
 package pe.jaav.sistemas.seguridadweb.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +13,33 @@ import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Picture;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.IOUtils;
+
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
 
 import pe.jaav.common.util.UtilesCommons;
 
@@ -549,45 +579,231 @@ public abstract class AbstractGenericManagedBean  implements Serializable {
 		MODO_ACTUAL = mODO_ACTUAL;
 	}
 	/***EDICIÓN DE DESCARGAS******/
-	@SuppressWarnings("unused")
+	
 	private String titulo = "";
 	public void actionLinkDescarga(String infoDoc) {
 		//System.out.println("TEST actionLinkDescarga..:"+infoDoc);
 		titulo = infoDoc;
 	}
-    public void postProcessXLS_descarga(Object document) {
+
+    /** procesar descarga en XLS a partir de un Documento de DATATABLE Prime Faces
+     * @param document
+     */
+    @SuppressWarnings("static-access")
+	public void postProcessXLS_descarga(Object document) {
     	//System.out.println("TEST POST DESCARGA XLS...:"+titulo);
-    	try{                          
+    	try{
+            HSSFWorkbook wb = (HSSFWorkbook) document;
+            HSSFSheet sheet = wb.getSheetAt(0);
+            //SET NOMBRE A LA HOJA
+            wb.setSheetName(wb.getSheetIndex(sheet), titulo);
+                                             
+            //sheet.shiftRows(startRow, endRow, n);
+            sheet.shiftRows(0,sheet.getLastRowNum(),7);
+                        
+            //int rowHeadFecha=0;
+            //int rowHeadUser=1;
+            int rowTitle=5;
+            int rowHeader=7;
+            short colorForeGround = HSSFColor.BLUE_GREY.index; //**COLOR
+            //wb.setSheetName(0, titulo);           
+            //cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THICK); 
+            //cellStyle.setBorderRight(HSSFCellStyle.BORDER_THICK);
+            	
+            /*PARAT TÍTULO*/
+            HSSFFont tituloFont = wb.createFont();
+            tituloFont.setBoldweight(tituloFont.BOLDWEIGHT_BOLD);
+            tituloFont.setFontHeightInPoints((short) 14);
+            tituloFont.setColor(IndexedColors.WHITE.getIndex());
+           //Set Estilos
+            CellStyle tituloStyle = wb.createCellStyle();
+            tituloStyle.setFillForegroundColor(colorForeGround);
+            tituloStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+            //tituloStyle.setFillBackgroundColor(IndexedColors.BLACK.getIndex());
+            tituloStyle.setAlignment(tituloStyle.ALIGN_CENTER);
+            tituloStyle.setFont(tituloFont);
+            tituloStyle.setBorderBottom(HSSFCellStyle.BORDER_MEDIUM);
+            //BORDE
+            tituloStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            tituloStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            tituloStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            tituloStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+ 
+            tituloStyle.setTopBorderColor( HSSFColor.BLACK.index);
+            tituloStyle.setLeftBorderColor(HSSFColor.BLACK.index);
+            tituloStyle.setRightBorderColor(HSSFColor.BLACK.index);
+            tituloStyle.setBottomBorderColor(HSSFColor.BLACK.index);              
+
+            /*PARA HEADER*/
+            HSSFFont headerFont = wb.createFont();
+            headerFont.setBoldweight(headerFont.BOLDWEIGHT_BOLD);
+            headerFont.setFontHeightInPoints((short) 10);
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
+            headerFont.setFontName("Arial");
+                  
+            
+            HSSFCellStyle cellStyle = wb.createCellStyle();            
+            cellStyle.setFillForegroundColor(colorForeGround);
+            //cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+            //cellStyle.setFillBackgroundColor(IndexedColors.RED.getIndex());
+            cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+            cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            cellStyle.setFont(headerFont);
+            //BORDE
+            cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+ 
+            cellStyle.setTopBorderColor( HSSFColor.BLACK.index);
+            cellStyle.setLeftBorderColor(HSSFColor.BLACK.index);
+            cellStyle.setRightBorderColor(HSSFColor.BLACK.index);
+            cellStyle.setBottomBorderColor(HSSFColor.BLACK.index);            
+            
+            HSSFCellStyle cellStyleData = wb.createCellStyle();        
+            //cellStyleData.setFillForegroundColor(HSSFColor.RED.index);
+            //cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+            //cellStyle.setFillBackgroundColor(IndexedColors.RED.getIndex());
+            //cellStyleData.setFillPattern(CellStyle.SOLID_FOREGROUND);
+            //cellStyleData.setAlignment(CellStyle.ALIGN_CENTER);
+            cellStyleData.setFont(headerFont);
+            //BORDE
+            cellStyleData.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            cellStyleData.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            cellStyleData.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            cellStyleData.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+ 
+            cellStyleData.setTopBorderColor( HSSFColor.BLACK.index);
+            cellStyleData.setLeftBorderColor(HSSFColor.BLACK.index);
+            cellStyleData.setRightBorderColor(HSSFColor.BLACK.index);
+            cellStyleData.setBottomBorderColor(HSSFColor.BLACK.index);    
+            
+            
+            //SET HEADER
+            HSSFRow header = sheet.getRow(rowHeader);
+            int cantCeldasTitulo=0;
+            for(int i=0; i < header.getPhysicalNumberOfCells();i++) {
+                HSSFCell cell = header.getCell(i);             
+                cell.setCellStyle(cellStyle);
+                sheet.autoSizeColumn(i);
+                cantCeldasTitulo++;
+            }
+            if(cantCeldasTitulo<5){
+            	
+            }
+                        
+            //SET TITULO
+            //HSSFRow title = sheet.getRow(rowTitle);            
+            HSSFRow title = sheet.createRow(rowTitle);
+            for(int i=0; i < cantCeldasTitulo;i++) {
+            	title.createCell(i);	
+            }            
+            
+            sheet.addMergedRegion(new CellRangeAddress(rowTitle,rowTitle,0,cantCeldasTitulo-1));
+            
+            for(int i=0;i<cantCeldasTitulo;i++){
+            	title.getCell(i).setCellStyle(tituloStyle);	
+            }                      
+            title.getCell(0).setCellValue(""+titulo);
+            
+            
+            /*TRABAJAR LOGO **/
+            try{
+            	String logo = getPathLogoDocument(Utiles.FORMATO_XLS);            	
+                //System.out.println("TEST PRE  DESCARGA PDF LOGO...:"+logo);
+                /**FALTA AJUSTAR LA IMAGEN*/                                
+                //FileInputStream obtains input bytes from the image file
+                InputStream inputStream = new FileInputStream(logo);
+                //Get the contents of an InputStream as a byte[].
+                byte[] bytes = IOUtils.toByteArray(inputStream);
+                //Adds a picture to the workbook
+                int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+                //close the input stream
+                inputStream.close();                
+                //Returns an object that handles instantiating concrete classes
+                CreationHelper helper = wb.getCreationHelper();
+                //Crear the top-level 
+                Drawing drawing = sheet.createDrawingPatriarch();
+                //Create an anchor that is attached to the worksheet
+                ClientAnchor anchor = helper.createClientAnchor();
+                //set top-left corner for the image
+                anchor.setCol1(0);
+                anchor.setCol2(2);
+                anchor.setRow1(0);
+                anchor.setRow2(3);
+                //Creates a picture
+                Picture pict = drawing.createPicture(anchor, pictureIdx);
+                //Reset the image to the original size
+                pict.resize();
+            }catch(Exception  ex){ //FileNotFoundException
+            	ex.printStackTrace();
+            }
+            
             /******************/
             
     	}catch(Exception ex){    		
-    		ex.printStackTrace();    		
+    		ex.printStackTrace();
+    		FacesUtil.adicionarMensajeWarning("No se pudo descargar el Archivo en este momento.");
     	}    	
-   
-    }      
+        titulo="";
+    }     
     
-	public void preProcessPDF_descarga(Object document) throws IOException
-		/*, BadElementException, DocumentException*/ {
+    
+	/** procesar descarga en PDF a partir de un Documento de DATATABLE Prime Faces
+	 * @param document
+	 * @throws IOException
+	 * @throws DocumentException 
+	 */
+	public void preProcessPDF_descarga(Object document) {
 		//System.out.println("TEST PRE  DESCARGA PDF...:"+titulo);
-//        Document pdf = (Document) document;
-//        
-//        pdf.setPageSize(PageSize.A4.rotate());        
-//        pdf.open();                       
-//        pdf.addCreationDate();        
-//
-//		//ADD TITULO
-//        Paragraph paragraph = new Paragraph();
-//        paragraph.setSpacingAfter(20);
-//        paragraph.setSpacingBefore(30);
-//        paragraph.setAlignment(Element.ALIGN_CENTER);                                        
-//        paragraph.add(new Chunk(new String(titulo.getBytes(), "ISO-8859-1"), new Font(Font.BOLD,22)));
-//        //Phrase  phTit = new Phrase();
-//        //phTit.setFont(new Font(Font.BOLD, 25));
-//        //phTit.add("ESTE ES EL TITULO");               
-//        pdf.add(paragraph);
-//                
-//        titulo="";
+	    Document pdf = (Document) document;
+	    pdf.setPageSize(PageSize.A4.rotate());        
+	    pdf.open();                       
+	    pdf.addCreationDate();        
+	    
+	    //ADD IMAGEN
+	    try{
+	        
+	        String logo = getPathLogoDocument(Utiles.FORMATO_PDF);
+	        //System.out.println("TEST PRE  DESCARGA PDF LOGO...:"+logo);
+	        /**FALTA AJUSTAR LA IMAGEN*/
+	        Image imageLeft = Image.getInstance(logo);
+	
+	        //imageLeft.scaleToFit(2,2);
+	        //imageLeft.scaleAbsolute(150,35);
+	        //imageLeft.setAlignment(Image.ALIGN_CENTER);                        
+	        imageLeft.setAlignment(Image.ALIGN_LEFT);
+	        pdf.add(imageLeft);
+	        
+			//ADD TITULO
+		    Paragraph paragraph = new Paragraph();
+		    paragraph.setSpacingAfter(20);
+		    paragraph.setSpacingBefore(30);
+		    paragraph.setAlignment(Element.ALIGN_CENTER);                                        
+		    paragraph.add(new Chunk(new String(titulo.getBytes(), "ISO-8859-1"), new Font(Font.BOLD,22)));
+		    //Phrase  phTit = new Phrase();
+		    //phTit.setFont(new Font(Font.BOLD, 25));
+		    //phTit.add("ESTE ES EL TITULO");               
+		    pdf.add(paragraph);	  	        
+	    }catch(Exception  ex){ //FileNotFoundException
+	    	ex.printStackTrace();
+	    }
+	  	    	  
+	    titulo="";
 	}
+
+
+	public String getPathLogoDocument(String type){						
+		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		String logo = servletContext.getRealPath("") + File.separator+"resources"+
+				File.separator + "images"  + File.separator +
+				((Utiles.FORMATO_PDF.equals(type)) ? FacesUtil.getPropertyParametros("PARAM_IMAGEN_LOGO_HEAD_PDF"):
+					FacesUtil.getPropertyParametros("PARAM_IMAGEN_LOGO_HEAD_XLS"))				
+				;
+		
+		return logo;
+	}
+		
 
 	public boolean isBtnGuardarInactivarVisible() {
 		return btnGuardarInactivarVisible;

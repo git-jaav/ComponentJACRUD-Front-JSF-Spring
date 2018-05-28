@@ -49,12 +49,17 @@
             <!-- /.login-logo -->
             <div class="box login-box-body">
                
-                <h:form  prependId="false">
+                <h:form  prependId="false" id="formLogin" >
+					<p:blockUI block="formLogin" widgetVar="blockElem" id="blockElem" 
+						trigger="btnPreLogin">
+						#{mensaje.MSJ_BLOCKUI_Proceso}<br />
+						<p:graphicImage value="/resources/images/loader03.gif" />
+					</p:blockUI>                
                     <p class="login-box-msg">Ingresar su usuario y clave para ingresar</p>
 					<p:remoteCommand  id="rcInit" name="inicializar"
 						actionListener="#{loginMBean.preRender}"
 					/>	                    
-                    <p:messages closable="true"  rendered="false" />
+                    <p:messages id="messages" closable="true"  rendered="false" />
                     <div class="form-group has-feedback">
 						<p:inputText id="j_username" type="text"
 								value="#{loginMBean.email}" tabindex="2"
@@ -84,8 +89,8 @@
 							<p:commandButton id="btnPreLogin" value="Ingresar" tabindex="4"
 								update="messages messagesFoot"
 								process="@all" actionListener="#{loginMBean.btnPreLogin}"														 
-								async="true" styleClass="btn btn-success btn-block"
-								ajax="false">
+								styleClass="btn btn-success btn-block"
+								>
 							</p:commandButton>                        
                             <p:commandButton styleClass="btn btn-success btn-block" onclick="showBar()"
                             	rendered="false"

@@ -37,6 +37,8 @@ public class FacesUtil {
 	public static ResourceBundle propiedadesParam= ResourceBundle.getBundle("parametrosSys");
 	public static ResourceBundle propiedadesLabelVistas= ResourceBundle.getBundle("labelsVistas",FacesUtil.getContextLocale());
 	
+	public static ResourceBundle propiedadesBuildInfo = ResourceBundle.getBundle("build/buildInfo",FacesUtil.getContextLocale());
+	
 	public static String LOCALE_CODIGO_SPAIN_DESC="Español";
 	public static String LOCALE_CODIGO_ENGLISH_DESC="English";
 	
@@ -198,6 +200,14 @@ public class FacesUtil {
 		}else{
 			return "";
 		}					
+	}
+	
+	public static String getPropertyBuildInfo(String prop){
+		if(propiedadesBuildInfo.containsKey(prop)){
+			return propiedadesBuildInfo.getString(prop);
+		}else{
+			return "";
+		}
 	}
 	
     public static void addErrorMessage(Exception ex, String defaultMsg) {

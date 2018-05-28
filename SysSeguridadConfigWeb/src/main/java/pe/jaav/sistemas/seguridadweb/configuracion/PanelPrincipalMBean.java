@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import pe.jaav.common.util.UtilesCommons;
 import pe.jaav.sistemas.seguridadweb.server.EntidadSession;
+import pe.jaav.sistemas.seguridadweb.util.FacesUtil;
 import pe.jaav.sistemas.seguridadweb.util.Utiles;
 
 /**
@@ -30,6 +31,8 @@ public class PanelPrincipalMBean  implements Serializable {
 	private String nombreUsuarioShow;
 	private String equipoActualShow;
 	private String lbFechaPrincipal;
+	
+	private String fechaBuildShow;
 	
 	/********/
 	
@@ -95,6 +98,15 @@ public class PanelPrincipalMBean  implements Serializable {
 
 	public void setLbFechaPrincipal(String lbFechaPrincipal) {
 		this.lbFechaPrincipal = lbFechaPrincipal;
+	}
+
+	public String getFechaBuildShow() {
+		fechaBuildShow = FacesUtil.getPropertyBuildInfo("build.timestamp");
+		return fechaBuildShow;
+	}
+
+	public void setFechaBuildShow(String fechaBuildShow) {
+		this.fechaBuildShow = fechaBuildShow;
 	}
 
 

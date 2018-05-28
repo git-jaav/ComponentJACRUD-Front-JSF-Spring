@@ -131,7 +131,7 @@
 									<p:column>
 										<p:inputText
 											value="#{sysUsuarioMBean.registroUsuario.usuaNombre}"
-											readonly="fakse" />
+											readonly="#{sysUsuarioMBean.componentesReadonly}" />
 									</p:column>
 									<p:column>
 										<p:commandButton id="btnSelPersona" value="..." ajax="true"
@@ -153,7 +153,8 @@
 									styleClass="estiloLabelForm" />
 								<p:selectOneMenu autoWidth="false"
 									value="#{sysUsuarioMBean.registroUsuario.usuaEstado}"
-									disabled="#{sysUsuarioMBean.componentesReadonly}">
+									style="#{sysUsuarioMBean.componentesReadonly?'pointer-events: none; cursor: default;':''}"
+									>
 									<f:selectItem itemLabel="#{lbv.ACTIVO_CAP}"
 										itemValue="#{constant.ACTIVO_db}" />
 									<f:selectItem itemLabel="#{lbv.INACTIVO_CAP}"

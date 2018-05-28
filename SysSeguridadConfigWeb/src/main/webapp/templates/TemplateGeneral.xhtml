@@ -20,12 +20,12 @@
     <ui:define name="logo-lg">
     	<p:graphicImage value="#{paramsys.PATH_IMAGE_SHOW}" height="35px" 
     		style="padding-right:10px; padding-left:0px;" />
-      	
-        #{paramsys.NOMBRE_SISTEMA}
+      	<span >#{paramsys.NOMBRE_SISTEMA}</span>        
     </ui:define>
 
     <ui:define name="logo-mini">
-        #{paramsys.NOMBRE_SISTEMA}
+        <p:graphicImage value="#{paramsys.PATH_IMAGE_SHOW}" height="35px" 
+    		style="padding-right:10px; padding-left:0px; margin-top:-10px;" />
     </ui:define>
 
     <ui:define name="top-menu">
@@ -53,7 +53,7 @@
 						class="fa fa-calendar-plus-o"></i>
 						#{panelPrincipalMBean.lbFechaPrincipal}
 				</a></li>			
-				<li><a href="/"
+				<li><a href="#{facesContext.externalContext.requestContextPath}#{paramsys.PAR_PAGININA_DEFAULT}"
 					class="estiloLabelForm" onclick="clearBreadCrumbs();"> <i
 						class="fa fa-home"></i> #{paramsys.PAR_OPCION_INICIO}
 					</a>
