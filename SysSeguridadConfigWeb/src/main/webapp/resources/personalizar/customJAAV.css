@@ -443,3 +443,9 @@ fieldset[disabled] .btn-primary.active {
 .sinpadding [class*="col-"] {
     padding: 0;
 }		
+
+
+.ui-growl {
+	right: 20px;
+	top: 50%;
+}

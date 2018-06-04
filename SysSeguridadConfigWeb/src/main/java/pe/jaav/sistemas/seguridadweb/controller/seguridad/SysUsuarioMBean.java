@@ -154,8 +154,8 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 	}
 	
 	public SysUsuario transformarEntidad(SysUsuario objSave){							
-		objSave.setUsuariomodif(EntidadSession.getInstance().getUsuario());
-		objSave.setFechamodif(new Date());
+		objSave.setUsuaUsuariomodif(EntidadSession.getInstance().getUsuario());
+		objSave.setUsuaFechamodif(new Date());
 		return objSave;
 	}
 	

@@ -34,8 +34,8 @@
 
 			<p:remoteCommand name="inicializar" update="@form" actionListener="#{sysUsuarioMBean.inicializar()}" />
 
-			<p:messages id="messages" globalOnly="true" autoUpdate="true" closable="true" rendered="true" />
-			<p:growl  globalOnly="true"  autoUpdate="true"  escape="true" showDetail="false"  rendered="false"  ></p:growl>
+			<p:messages id="messages" globalOnly="true" autoUpdate="true" closable="true" rendered="false" />
+			<p:growl  globalOnly="true"  autoUpdate="true"  escape="true" showDetail="false"  rendered="true"  ></p:growl>
 			<p:tooltip></p:tooltip>
 			<p:blockUI block="FormUsuario" widgetVar="blockElem" id="blockElem" 
 				trigger="btnNuevo btnBuscar dtElemTable">
