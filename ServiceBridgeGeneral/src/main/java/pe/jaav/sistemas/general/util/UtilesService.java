@@ -29,6 +29,14 @@ public class UtilesService {
 		mapHeaderRequest.put(UtilesService.JWT_TOKEN_HEADER_PARAM, currentToken);		
 		return mapHeaderRequest;
 	}	
-	 
+
+	public static String getPropertyPathServer(){
+		String pathServer = System.getProperty(
+				UtilesService.getPropertyParametros("URL_TEMPLATE_SERVICERESTGENERAL_PATH_SERVER_PROP"));
+		if(UtilesCommons.esVacio(pathServer)){
+			pathServer = UtilesService.getPropertyParametros("URL_TEMPLATE_SERVICERESTGENERAL_PATH_SERVER")	;
+		}
+		return pathServer;
+	}
 	
 }

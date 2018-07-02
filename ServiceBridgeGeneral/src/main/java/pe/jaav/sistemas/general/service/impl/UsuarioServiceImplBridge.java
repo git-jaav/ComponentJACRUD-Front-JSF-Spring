@@ -28,7 +28,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 	
 	
 	public String urlTempServicetGenPathApi = UtilesService.getPropertyParametros("URL_TEMPLATE_SERVICERESTGENERAL_PATH_API");
-	public String urlTempServiceGenPathServer = UtilesService.getPropertyParametros("URL_TEMPLATE_SERVICERESTGENERAL_PATH_SERVER");		
+	//public String urlTempServiceGenPathServer = UtilesService.getPropertyPathServer();		
 
 	/**Si se desea tratar Map de Sesiones y Tokesn*/
 	@SuppressWarnings("unused")
@@ -37,7 +37,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 	
 	@Override
 	public Optional<SysUsuario> obtenerLogin(String usuario, String clave) {
-		String urlParam = urlTempServiceGenPathServer +urlTempServicetGenPathApi +URI_LOGIN;//+usuario+"/"+clave;
+		String urlParam = UtilesService.getPropertyPathServer() +urlTempServicetGenPathApi +URI_LOGIN;//+usuario+"/"+clave;
 		SysUsuario obj = new SysUsuario();
 		obj.setUsuaUsuario(usuario);
 		obj.setUsuaClave(clave);
@@ -47,7 +47,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 
 	@Override
 	public Optional<SysUsuario> obtenerPorID(Integer id,String currentToken) {
-		String urlParam = urlTempServiceGenPathServer +urlTempServicetGenPathApi+URI_USER+id;			
+		String urlParam = UtilesService.getPropertyPathServer() +urlTempServicetGenPathApi+URI_USER+id;			
 		Object result = UtilesJSON.getObjectJson(urlParam, SysUsuario.class,
 				UtilesService.getMapHeaderRequestToken(currentToken));				
 		return (result !=null ? Optional.of((SysUsuario)result):Optional.empty());
@@ -62,7 +62,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SysUsuario> listar(SysUsuario objUsuario, boolean paginable,String currentToken) {		
-		String urlParam = urlTempServiceGenPathServer +urlTempServicetGenPathApi+URI_USERS;					
+		String urlParam = UtilesService.getPropertyPathServer() +urlTempServicetGenPathApi+URI_USERS;					
 		Object result = UtilesJSON.getListJsonFiltro(urlParam,objUsuario,new TypeReference<List<SysUsuario>>() {},
 				UtilesService.getMapHeaderRequestToken(currentToken),true);
 		List<SysUsuario> lista = null;
@@ -75,10 +75,8 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public PaginacionModel<SysUsuario> listar(SysUsuario objUsuario,String currentToken) {
-		PaginacionModel<SysUsuario> paginacion = PaginacionModel.crearPaginaVacia(); 
-		
-		
-		String urlParam = urlTempServiceGenPathServer +urlTempServicetGenPathApi+URI_USERS_PAG;
+		PaginacionModel<SysUsuario> paginacion = PaginacionModel.crearPaginaVacia(); 				
+		String urlParam = UtilesService.getPropertyPathServer() +urlTempServicetGenPathApi+URI_USERS_PAG;
 		//List<?> result = UtilesJSON.getListJsonFiltro(urlParam,objUsuario, SysUsuario.class);		
 		
 		Object result = UtilesJSON.getListJsonFiltro(urlParam,objUsuario,new TypeReference<List<SysUsuario>>() {},
@@ -96,7 +94,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 	
 	@Override
 	public ResultTx<SysUsuario> guardar(SysUsuario objUsuario,String currentToken) {
-		String urlParam = urlTempServiceGenPathServer +urlTempServicetGenPathApi+URI_USER+"i/";					
+		String urlParam = UtilesService.getPropertyPathServer() +urlTempServicetGenPathApi+URI_USER+"i/";					
 		Object result = UtilesJSON.getObjectJsonFiltro(urlParam,objUsuario,objUsuario.getClass(),
 				UtilesService.getMapHeaderRequestToken(currentToken));
 		return (result !=null ? ResultTx.ok((SysUsuario)result): ResultTx.error(objUsuario,UtilesCommons.TYPE_COD_NULL));
@@ -104,7 +102,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 
 	@Override
 	public ResultTx<SysUsuario> actualizar(SysUsuario objUsuario,String currentToken) {
-		String urlParam = urlTempServiceGenPathServer +urlTempServicetGenPathApi+URI_USER+"u/";					
+		String urlParam = UtilesService.getPropertyPathServer() +urlTempServicetGenPathApi+URI_USER+"u/";					
 		Object result = UtilesJSON.getObjectJsonFiltro(urlParam,objUsuario,objUsuario.getClass(),
 				UtilesService.getMapHeaderRequestToken(currentToken));
 		return (result !=null ? ResultTx.ok((SysUsuario)result): ResultTx.error(objUsuario,UtilesCommons.TYPE_COD_NULL));
@@ -112,7 +110,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 
 	@Override
 	public ResultTx<SysUsuario> eliminar(SysUsuario objUsuario,String currentToken) {
-		String urlParam = urlTempServiceGenPathServer +urlTempServicetGenPathApi+URI_USER+"d/";					
+		String urlParam = UtilesService.getPropertyPathServer() +urlTempServicetGenPathApi+URI_USER+"d/";					
 		Object result = UtilesJSON.deleteObjectJson(urlParam,objUsuario,objUsuario.getClass(),
 				UtilesService.getMapHeaderRequestToken(currentToken));
 		return (result !=null ? ResultTx.ok((SysUsuario)result): ResultTx.error(objUsuario,UtilesCommons.TYPE_COD_NULL));
@@ -120,7 +118,7 @@ public class UsuarioServiceImplBridge   implements UsuarioService{
 
 	@Override
 	public Optional<SysUsuario> obtenerLoginAuth(Object objCredential) {
-		String urlParam = urlTempServiceGenPathServer +URI_SECURITY_AUTH;//+usuario+"/"+clave;
+		String urlParam = UtilesService.getPropertyPathServer() +URI_SECURITY_AUTH;//+usuario+"/"+clave;
 		
 		/**Tratar MAP header*/
 		Map<String,String> mapToken = UtilesCommons.getNewHashMap();
