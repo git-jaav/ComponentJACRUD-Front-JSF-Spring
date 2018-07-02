@@ -4,6 +4,7 @@ package pe.jaav.sistemas.seguridadweb.controller;
 import org.primefaces.context.RequestContext;
 
 import pe.jaav.sistemas.general.service.UsuarioService;
+import pe.jaav.sistemas.security.UserCredentials;
 import pe.jaav.sistemas.seguridadgeneral.model.domain.SysUsuario;
 import pe.jaav.sistemas.seguridadweb.server.EntidadSession;
 import pe.jaav.sistemas.seguridadweb.util.Constant;
@@ -63,7 +64,11 @@ public class LoginMBean implements Serializable{
 	private String flagLogin = "NO";	
 	private boolean cargarCaptcha = true;
 	
-	private Integer idUsuarioTemp ;
+	private Integer idUsuarioTemp;
+	private String tokenSesion;
+	
+	//PARAM SECURITY AUTH
+	private String paramSecurityAuth = FacesUtil.getPropertyParametros("PARAM_ENABLED_SECURITY_AUTH");
 	
  	
 	@PostConstruct
@@ -126,14 +131,11 @@ public class LoginMBean implements Serializable{
 				RequestContext.getCurrentInstance().execute("doLogin();");
 				messageAlertFood = null;
 				claveAuxiliar = this.getClave();
-			}
-			//nuevoCaptcha();			
-			//RequestContext context = RequestContext.getCurrentInstance();
-			//context.addCallbackParam("estaLogeado", logeado);						
+			}									
 		}catch(Exception ex){
 			RequestContext context = RequestContext.getCurrentInstance();
 			context.addCallbackParam("estaLogeado", false);
-			FacesUtil.adicionarMensajeError("Ocurrió un error Inesperado");
+			FacesUtil.adicionarMensajeError("Error Inesperado");
 			ex.printStackTrace();
 		}
 	}
@@ -157,7 +159,7 @@ public class LoginMBean implements Serializable{
 						+ "&j_password=" + claveAuxiliar
 						+ "&j_loginsuccessful=" + paramSusces
 						+ "&j_loginidusuario=" + idUsuarioTemp
-						
+						+ "&j_tokenSesion=" + tokenSesion						
 						);
 		try{
 		dispatcher.forward((ServletRequest) context.getRequest(),
@@ -282,6 +284,7 @@ public class LoginMBean implements Serializable{
 				logeado = true;
 				if(logeado){
 					idUsuarioTemp = login.getUsuaId(); 
+					tokenSesion = login.getTokenSecurity()!=null?login.getTokenSecurity():"";
 					messageFinal = FacesUtil.getMSJProperty("MSJ_INFO_loginCorrecto") +" " +login.getUsuaNombre();									
 					//return logeado;
 				}
@@ -310,12 +313,26 @@ public class LoginMBean implements Serializable{
 
 	
 	/** Obtener el USUARIO DE ACCESO*/
-	public SysUsuario validarPreAcceso(String usuario, String clave) {
-		if(clave==null){
-			clave ="";
-		}	
-		Optional<SysUsuario> optUser = usuarioService.obtenerLogin(usuario,clave); 
-		return optUser.isPresent() ? optUser.get() : null;
+	public SysUsuario validarPreAcceso(String usuario, String clave) {		
+		Optional<SysUsuario> optUser = Optional.empty();
+		try{
+			if(clave==null){
+				clave ="";
+			}	
+			if(Constant.SI_db.equals(paramSecurityAuth)){
+				//Seguridad del API REST AUTH
+				UserCredentials userCred = new UserCredentials();
+				userCred.setUsername(usuario);
+				userCred.setPassword(clave);			
+				optUser = usuarioService.obtenerLoginAuth(userCred);
+			}else{
+				//login DB normal
+				optUser = usuarioService.obtenerLogin(usuario,clave);
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return optUser.isPresent() ? optUser.get() : null;		
 	}
 	/**Método que indica si el usuario está logueado correctamete (Invocado desde JS)*/
 	public boolean setIntentosLoginUsados(SysUsuario userLogin, boolean loginSucces) {		

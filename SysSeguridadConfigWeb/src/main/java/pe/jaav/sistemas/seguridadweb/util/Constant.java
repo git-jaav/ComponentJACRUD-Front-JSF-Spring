@@ -3,20 +3,17 @@ package pe.jaav.sistemas.seguridadweb.util;
 
 public class Constant{
 
-	/*GENERAL NEGOCIO AQUILES*/
-	
-	public static final String SISTEMA_CODIGO = "SP4W";
+	/** CONSTANTES GENERALES NEGOCIO **/
 	
 	public static final String USUARIO_ADMINSYS= "ADMINSYS";
 	public static final String COMPANIA_VARIABLE = "999999";
 	public static final String APLICACION_CODIGO = "TW";
-	public static final String PORC_APLICA_ASISTENCIA = "KEY_PORC_DESAPRUEBA";
-	public static final String APLICACION_CODIGO_GEN = "WF";
-
-	public static final String APP_CODIGO = "TW";
-	public static final String APP_COMPANIA = "999999";
-		
+	public static final String APLICACION_CODIGO_GEN = "WF";	
 	
+	public static final String APP_CODIGO = "TW";
+	public static final String APP_COMPANIA = "999999";		
+	
+	public static final String DB_CODE = "DB";
 	//public static ResourceBundle propiedadesParam= ResourceBundle.getBundle("parametrosService");
 
 	

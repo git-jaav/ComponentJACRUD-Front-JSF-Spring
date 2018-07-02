@@ -864,8 +864,6 @@ public abstract class AbstractGenericManagedBean  implements Serializable {
 		this.lenguaje = lenguaje;
 	}
 
-
-
 	public String getLocaleSession() {
 		return localeSession;
 	}
@@ -877,6 +875,10 @@ public abstract class AbstractGenericManagedBean  implements Serializable {
 
 	public String getUrlDefaultBlank() {		 			
 		return URL_DEFAULT;
+	}
+	
+	public String getTokenSesionActual() {		 			
+		return EntidadSession.getInstance().getTokenSecurity();
 	}
 }
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -104,12 +103,13 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 		
 
 			//VALIDAR REPETICION
-			if(MODO_NEW.equals(MODO_ACTUAL)){
-				Optional<SysUsuario> objResultValid = usuarioService.obtenerPorID(objSave.getUsuaId());
-				if(objResultValid.isPresent()){
+			if(MODO_NEW.equals(MODO_ACTUAL)){				
+				SysUsuario filtroVal = new SysUsuario(); 
+				filtroVal.setUsuaUsuario(objSave.getUsuaUsuario());
+				List<SysUsuario> listaResult  = usuarioService.listar(filtroVal,false,getTokenSesionActual());
+				if(UtilesCommons.noEsVacio(listaResult)){
 					FacesUtil.adicionarMensajeWarning(FacesUtil.getMSJProperty("MSJ_WARN_USUARIO_codUsuarioRepetido"));
-					
-				}				
+				}		
 			}
 
 		}
@@ -119,37 +119,42 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 	@Override
 	public void btnGuardar() {	
 		String onSuccesMsg = "";
-		ResultTx<SysUsuario> result = ResultTx.error(registroUsuario,UtilesCommons.TYPE_COD_NULL);		
-		if(esValidoFormulario(registroUsuario)){				
-			SysUsuario usuario = transformarEntidad(registroUsuario);
-			
-			if (MODO_ACTUAL.equals(MODO_NEW) ) {
-//				/**CIFRADO****************/
-//				String keyClave = encriptaKeyService.getCifrado(usuario.getClave());					
-//				usuario.setClave(keyClave);				
-				result = usuarioService.guardar(usuario);
-				onSuccesMsg = FacesUtil.getMSJProperty("MSJ_INFO_saveCorrecto");
-				/*************************/
-			}else if (MODO_ACTUAL.equals(MODO_UPDATE) ) {				
-//				/**CIFRADO****************/
-//				String keyClave = encriptaKeyService.getCifrado(usuario.getClave());					
-//				usuario.setClave(keyClave);				
-				result = usuarioService.actualizar(usuario);
-				onSuccesMsg = FacesUtil.getMSJProperty("MSJ_INFO_saveCorrecto");
-				/*************************/
-			} else if (MODO_ACTUAL.equals(MODO_DELETE) ) {
-				/**OBS:ELIMINAR*/
-				/***********/
-				result = usuarioService.eliminar(usuario);
-				onSuccesMsg = FacesUtil.getMSJProperty("MSJ_INFO_saveCorrecto");
-			} 			
-			if (result.isOk()) {											
-				btnCancelar();
-				btnBuscar();
-				FacesUtil.adicionarMensajeInfo(onSuccesMsg);
-			} else {
-				FacesUtil.adicionarMensajeError(FacesUtil.getMSJProperty("MSJ_ERROR_noSaveCorrecto"));
-			}		
+		ResultTx<SysUsuario> result = ResultTx.error(registroUsuario,UtilesCommons.TYPE_COD_NULL);
+		try{
+			if(esValidoFormulario(registroUsuario)){				
+				SysUsuario usuario = transformarEntidad(registroUsuario);
+				
+				if (MODO_ACTUAL.equals(MODO_NEW) ) {
+//					/**CIFRADO****************/
+//					String keyClave = encriptaKeyService.getCifrado(usuario.getClave());					
+//					usuario.setClave(keyClave);				
+					result = usuarioService.guardar(usuario,getTokenSesionActual());
+					onSuccesMsg = FacesUtil.getMSJProperty("MSJ_INFO_saveCorrecto");
+					/*************************/
+				}else if (MODO_ACTUAL.equals(MODO_UPDATE) ) {				
+//					/**CIFRADO****************/
+//					String keyClave = encriptaKeyService.getCifrado(usuario.getClave());					
+//					usuario.setClave(keyClave);				
+					result = usuarioService.actualizar(usuario,getTokenSesionActual());
+					onSuccesMsg = FacesUtil.getMSJProperty("MSJ_INFO_saveCorrecto");
+					/*************************/
+				} else if (MODO_ACTUAL.equals(MODO_DELETE) ) {
+					/**OBS:ELIMINAR*/
+					/***********/
+					result = usuarioService.eliminar(usuario,getTokenSesionActual());
+					onSuccesMsg = FacesUtil.getMSJProperty("MSJ_INFO_saveCorrecto");
+				} 			
+				if (result.isOk()) {											
+					btnCancelar();
+					btnBuscar();
+					FacesUtil.adicionarMensajeInfo(onSuccesMsg);
+				} else {
+					FacesUtil.adicionarMensajeError(FacesUtil.getMSJProperty("MSJ_ERROR_noSaveCorrecto"));
+				}		
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+			FacesUtil.adicionarMensajeError(FacesUtil.getMSJProperty("MSJ_ERROR_noSaveCorrecto"));
 		}
 	}
 	
@@ -265,7 +270,7 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 			public List<SysUsuario> load(int first, int pageSize, String sortField, SortOrder sortOrder,
 					Map<String, Object> filters) {
 				cargarObjetoFiltros(first, pageSize, 0);
-				PaginacionModel<SysUsuario> paginacionModel = usuarioService.listar(perfilUsuarioFiltro);				
+				PaginacionModel<SysUsuario> paginacionModel = usuarioService.listar(perfilUsuarioFiltro,getTokenSesionActual());				
 				listaTablaPrincipal = paginacionModel.getListaElementos();
 				setRowCount(paginacionModel.getNroTotalElementos());
 				setPageSize(pageSize);

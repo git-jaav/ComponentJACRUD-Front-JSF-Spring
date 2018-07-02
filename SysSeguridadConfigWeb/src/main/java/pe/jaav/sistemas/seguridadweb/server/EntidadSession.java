@@ -15,6 +15,7 @@ public  class EntidadSession implements Serializable{
 	//ADICIONAL PARA INTERNACIONALIZACION	
 	private Locale localeConfigActual;
 	
+	//CONFIG - USUARIO - CLIENTE
 	private Integer tipoUsuario;	
 	private String ipCliente;
 	private String sysUrl;
@@ -44,6 +45,7 @@ public  class EntidadSession implements Serializable{
 	private Date fechaSessionActual;	
 	private Integer persona;    
 	private String usuario;
+	private String tokenSecurity;
 	
 	private String nombreUsuario;
 	private String aplicacionCodigo;
@@ -316,6 +318,14 @@ public  class EntidadSession implements Serializable{
 
 	public void setUrlPaginaInicio(String urlPaginaInicio) {
 		this.urlPaginaInicio = urlPaginaInicio;
+	}
+
+	public String getTokenSecurity() {
+		return tokenSecurity;
+	}
+
+	public void setTokenSecurity(String tokenSecurity) {
+		this.tokenSecurity = tokenSecurity;
 	}
 
 

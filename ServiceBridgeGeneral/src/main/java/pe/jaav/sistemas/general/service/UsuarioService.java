@@ -10,15 +10,16 @@ import pe.jaav.sistemas.seguridadgeneral.model.domain.SysUsuario;
 public interface UsuarioService {
 	
 	public Optional<SysUsuario> obtenerLogin(String usuario , String clave);
+	public Optional<SysUsuario> obtenerLoginAuth(Object objCredential);
 	
-	public Optional<SysUsuario> obtenerPorID(Integer objUsuario);
-	public int contarListado(SysUsuario objUsuario);	
-	public List<SysUsuario> listar(SysUsuario objUsuario,boolean paginable);
+	public Optional<SysUsuario> obtenerPorID(Integer objUsuario,String currentToken);
+	public int contarListado(SysUsuario objUsuario,String currentToken);	
+	public List<SysUsuario> listar(SysUsuario objUsuario,boolean paginable,String currentToken);
 	
-	public PaginacionModel<SysUsuario> listar(SysUsuario objUsuario);
+	public PaginacionModel<SysUsuario> listar(SysUsuario objUsuario,String currentToken);
 	
-	public ResultTx<SysUsuario> guardar(SysUsuario objUsuario);
-	public ResultTx<SysUsuario> actualizar(SysUsuario objUsuario);
-	public ResultTx<SysUsuario> eliminar(SysUsuario objUsuario);
+	public ResultTx<SysUsuario> guardar(SysUsuario objUsuario,String currentToken);
+	public ResultTx<SysUsuario> actualizar(SysUsuario objUsuario,String currentToken);
+	public ResultTx<SysUsuario> eliminar(SysUsuario objUsuario,String currentToken);
 	
 }

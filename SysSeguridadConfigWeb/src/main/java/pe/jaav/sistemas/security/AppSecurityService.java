@@ -26,6 +26,10 @@ import java.util.Optional;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author JAAV
+ *
+ */
 public class AppSecurityService implements UserDetailsService {
 
 	/***********/
@@ -34,12 +38,13 @@ public class AppSecurityService implements UserDetailsService {
 	/***********/
 	
 	@Autowired
-	private UsuarioService usuarioService;
-	
-
+	private UsuarioService usuarioService;	
 	
 	Map<String, String> mapParametrosSys = new HashMap<String, String>();
 
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
+	 */
 	public UserDetails loadUserByUsername(String email)
 			throws UsernameNotFoundException {
 		HttpServletRequest req = (HttpServletRequest) FacesContext
@@ -49,18 +54,19 @@ public class AppSecurityService implements UserDetailsService {
 		String clave = (String) req.getParameter("j_password");
 		String success = (String) req.getParameter("j_loginsuccessful"); // PAR�?METRO SET POR LA VALIDACIÓN		
 		String idUsuario =  (String) req.getParameter("j_loginidusuario"); 
+		String tokenSesion =  (String) req.getParameter("j_tokenSesion");
+		
 		logeado = Utiles.SI_db.equals(success) ? true : false;
 
 
 		UsuarioSistema user = null;
 		//String paginaSgt = MISMA_PAGINA;
 
-		if (logeado) {// SOLO SI LA VALIDACIÓN ES CORRECTA
+		if (logeado) {// SOLO SI LA VALIDACIÓN ES CORRECTA			
 			SysUsuario objAcceso = new SysUsuario();
 			objAcceso.setUsuaUsuario(users);			
-			SysUsuario login =getUsuarioGeneral(idUsuario,users,clave,"DB");					
-			GenerarAcceso(login);					
-			
+			SysUsuario login =getUsuarioGeneral(idUsuario,users,clave,Constant.DB_CODE,tokenSesion);							
+			GenerarAcceso(login,tokenSesion);								
 			/************************************/
 			/** SI LAS VALIDACIONES SON CORRECTAS: forzar al SPRING SECURITY */								
 			login.setUsuaClave(clave);			
@@ -69,6 +75,18 @@ public class AppSecurityService implements UserDetailsService {
 		return user;
 	}
 
+	/** Establecer el Token para la sesion (si existiera)
+	 * @param token
+	 * @return
+	 */
+	public boolean setSesionComponent(String token){
+		boolean result = true;
+		if(UtilesCommons.noEsVacio(token)){
+			EntidadSession.getInstance().setTokenSecurity(token);
+		}
+		return result;
+	}
+	
 	private Collection<? extends GrantedAuthority> getRoles(SysUsuario login) {
 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -80,13 +98,22 @@ public class AppSecurityService implements UserDetailsService {
 		return authorities;
 	}
 
-	/***/
-	public SysUsuario getUsuarioGeneral(String id,String usuario, String clave,String indica) {
-		//SysUsuario objResult = null;
-		try{
-			Integer idUser  = Integer.parseInt(id);
-			Optional<SysUsuario> obtUser = usuarioService.obtenerPorID(idUser);
-			return obtUser.isPresent() ? obtUser.get() : null;
+	
+	/** Get usuario para la Sesion
+	 * @param id
+	 * @param usuario
+	 * @param clave
+	 * @param indica
+	 * @return
+	 */
+	public SysUsuario getUsuarioGeneral(String id,String usuario, String clave,String indica, String tokenSesion) {	
+		try{						
+			if(Constant.DB_CODE.equals(indica)){
+				Integer idUser  = Integer.parseInt(id);
+				Optional<SysUsuario> obtUser = usuarioService.obtenerPorID(idUser,
+						tokenSesion);
+				return obtUser.isPresent() ? obtUser.get() : null;				
+			}
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -94,11 +121,9 @@ public class AppSecurityService implements UserDetailsService {
 	}
 	
 	/** Generar Accesos */
-	public void GenerarAcceso(SysUsuario objAcceso) {
+	public void GenerarAcceso(SysUsuario objAcceso,String tokenSesion) {
 		try{		
 			/**PARA EL LOGIN DEL SISTEMA */
-			//NOTA:  SE USAR�? EL PERFIL POR DEFECTO ...por mejorar
-			//String usuarioPerfilDef = FacesUtil.getPropertyParametros("PAR_PERFIL_DEF_ADMIN");
 			Integer numPersona = 0;
 			EntidadSession global = new EntidadSession();			
 			global.setUsuario(objAcceso.getUsuaUsuario());//USUARIO SYS		
@@ -117,6 +142,7 @@ public class AppSecurityService implements UserDetailsService {
 			/** CARGAR VALORES ... **/
 			setParametrosSystem(true, null);
 			setParametrosCliente();			
+			setSesionComponent(tokenSesion);
 			if (numPersona>0){
 				//EntityGlobal.getInstance().setEmpleadoID(numPersona);
 			}						
