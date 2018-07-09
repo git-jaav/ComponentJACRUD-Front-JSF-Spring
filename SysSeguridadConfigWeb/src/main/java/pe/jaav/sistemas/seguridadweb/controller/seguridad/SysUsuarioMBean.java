@@ -88,7 +88,7 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 		if( UtilesCommons.esVacio(objSave.getUsuaUsuario()) ){
 			FacesUtil.adicionarMensajeWarning( FacesUtil.getMSJProperty("MSJ_INFO_WARN_USUARIO_REQUIRED_USUARIO"));
 			esValidoFormulario = false;
-		}
+		}		
 		
 		if(!MODO_DELETE.equals(MODO_ACTUAL) && !MODO_INACTIVAR.equals(MODO_ACTUAL)){
 			/*if(objSave.getPersona()==null 
@@ -192,7 +192,7 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 	
 	@Override
 	public void btnModificar() {
-		if (usuarioSeleccionado != null) {			
+		if (usuarioSeleccionado != null && verificarValidoEditable(usuarioSeleccionado)) {			
 			MODO_ACTUAL = MODO_UPDATE;			
 			setAtributosWindowsRegistro(MODO_ACTUAL);
 		} else {
@@ -212,7 +212,7 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 
 	@Override
 	public void btnEliminar() {
-		if (usuarioSeleccionado != null) {			
+		if (usuarioSeleccionado != null && verificarValidoEditable(usuarioSeleccionado)) {			
 			MODO_ACTUAL = MODO_DELETE;		
 			setAtributosWindowsRegistro(MODO_ACTUAL);
 		} else {
@@ -220,6 +220,14 @@ public class SysUsuarioMBean  extends AbstractGenericManagedBean implements Inte
 		}
 	}
 
+	/** En caso Se restrinja la edición de un elemento
+	 * @param usuario
+	 * @return
+	 */
+	public boolean verificarValidoEditable(SysUsuario usuario) {		
+		return !usuario.isUsuaFlagIneditableBool();			
+		
+	}
 	public void setAtributosWindowsRegistro(String modo) {
 		super.setAtributosWindowsRegistro(modo);		
 		claveRepeticion=null;

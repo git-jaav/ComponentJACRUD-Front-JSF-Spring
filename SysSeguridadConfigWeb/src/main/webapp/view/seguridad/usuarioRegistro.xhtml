@@ -162,20 +162,26 @@
 								</p:selectOneMenu>
 
 								<p:outputLabel value="#{lbv.USUARIO_EXPIRARCONTRASENA}"
-									rendered="false" styleClass="estiloLabelForm" />
-								<p:selectBooleanCheckbox id="chkExpirarContrasena" value=""
-									rendered="false"
+									styleClass="estiloLabelForm" />
+								<br />
+								<p:selectBooleanCheckbox id="chkExpirarContrasena" 
+									value="#{sysUsuarioMBean.registroUsuario.usuaFlagExpirarBool}"
+									
 									disabled="#{sysUsuarioMBean.componentesReadonly}">
-									<p:ajax process="@form" update="@form" event="change"
+									<p:ajax process="@form" update="#{p:component('opInfoGeneral')}" event="change"
 										listener="#{sysUsuarioMBean.eventocheckboxCaduca}" />
 								</p:selectBooleanCheckbox>
-
-								<p:outputLabel value="#{lbv.USUARIO_FECHADEEXPIRACION}"
-									styleClass="estiloLabelForm" id="lbFechaExpira"
-									rendered="false" style="#{label.STYLE_LABELFORM}" />
-								<p:calendar id="fechaExpira" rendered="false"
-									pattern="dd/MM/yyyy" mask="true"
-									readonly="#{sysUsuarioMBean.componentesReadonly}" />
+								
+								<p:outputPanel id="opFechaExp" rendered="#{sysUsuarioMBean.registroUsuario.usuaFlagExpirarBool}" >
+									<p:outputLabel value="#{lbv.USUARIO_FECHADEEXPIRACION}"
+										styleClass="estiloLabelForm" id="lbFechaExpira"
+										 style="#{label.STYLE_LABELFORM}" />
+									<p:calendar id="fechaExpira" 
+										pattern="#{paramsys.PATTERN_DATE}" mask="true" 
+										value="#{sysUsuarioMBean.registroUsuario.usuaFechaExpiracion}"
+										readonlyInput="#{sysUsuarioMBean.componentesReadonly}"
+										readonly="#{sysUsuarioMBean.componentesReadonly}" />								
+								</p:outputPanel>									
 
 							</p:column>
 
