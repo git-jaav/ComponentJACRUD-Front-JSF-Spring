@@ -25,11 +25,16 @@
 	</context-param>
 
 	
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>admin-1.0.0-RC19</param-value>
+    </context-param>
+    <!-- 	
 	<context-param>
 	    <param-name>primefaces.THEME</param-name>
 	    <param-value>adminCustomized</param-value>
 	</context-param>
-
+ 	-->
 	<welcome-file-list>
 		<welcome-file>redirecciona.xhtml</welcome-file>
 	</welcome-file-list>

@@ -120,11 +120,19 @@
 			<version>1.0</version>
 			<type>jar</type>
 		</dependency>	
-        		
+        <!-- 
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>ThemePFCustomized</artifactId>
             <version>0.0.1</version>
+        </dependency>
+         -->
+        <dependency>
+            <groupId>com.github.adminfaces</groupId>
+            <artifactId>admin-theme</artifactId>
+            <version>1.0.0-RC19</version>
+            <!-- end::dep-admin-theme[] -->
+            <classifier>no-cache</classifier>
         </dependency>
         
         <!-- 		

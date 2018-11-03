@@ -4,34 +4,44 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:p="http://primefaces.org/ui">
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:adm="http://github.com/adminfaces"
+	   >
+	  
 
 <f:view contentType="text/html" locale="#{redireccionaMBean.lenguaje}" >
 	<h:head>
 		<f:facet name="first">			
-			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />		
-			<meta charset="utf-8"/>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-			<meta name="apple-mobile-web-app-capable" content="yes" />
-						
-			<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-			
+		    <meta charset="utf-8"/>
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+		    <meta name="apple-mobile-web-app-capable" content="yes"/>
+		    <meta name="mobile-web-app-capable" content="yes"/>
+    		
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />						
 			<title>#{paramsys.TITLE}</title>
 		</f:facet>
 		<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.png']}"/>	
 
 		<!--=== CSS ===-->		
+		
+        
+        <link href="#{request.contextPath}/resources/css/showcase.css" rel="stylesheet" type="text/css" />       
+        <link href="#{request.contextPath}/resources/css/prism.css" rel="stylesheet" type="text/css" />
+        
+         		
+		<!-- 
 		<link href="#{request.contextPath}/resources/personalizar/personalStylus.css" rel="stylesheet" type="text/css" />
-
+ 		-->
 		<!-- Ionicons -->
+		<!-- 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+ 		-->
 
-		<link rel="stylesheet"
-		  href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
-
-		<!--=== CUSTOM JAAV ===-->
+		<!--=== CUSTOM  ===-->
 		<link href="#{request.contextPath}/resources/personalizar/customJAAV.css" rel="stylesheet" type="text/css" />
+				
 
 		<ui:insert name="head" />
 		<ui:insert name="head-end" />
@@ -52,7 +62,7 @@
 					</span>
 				</a>
 				<nav class="navbar navbar-static-top" role="navigation">
-					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+					<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 						<span class="sr-only"></span>
 					</a>
 					<div class="navbar-custom-menu" >
@@ -72,36 +82,252 @@
 			<!-- content -->
 			<div class="content-wrapper">
 				<ui:insert name="content-wrapper"/>
-				<section class="content-header" style="display:none;" >
-					<h1  >
+				<section class="content-header" style="margin-bottom: 0px;
+   									 margin-top: -10px;
+    								margin-right: -10px;
+    								margin-left: -10px;"  >
+					<h1 style="display:none;" >
 						<ui:insert name="title" />
 						<small><ui:insert name="description" /></small>
 					</h1>
 					<ui:insert name="content-header"/>
 				</section>
-				<section class="content" style="padding: 5px;" >
+				<section class="content" style="margin-bottom: 0px; margin-top: 30px; padding: 5px;" >
 					<ui:insert name="content-begin"/>
 					<ui:insert name="body" />
 				</section>
 				<ui:insert name="content-end"/>
 			</div>
+			
 			<footer class="main-footer" style="padding: 5px;" >
 				<ui:insert name="footer"/>
 			</footer>
+			
+      		<div id="scrollTop" class="ripplelink scroll-top" onclick="window.scrollTo(0, 0)">
+            	<i class="fa fa-chevron-up"></i>
+        	</div>
+        		
+        	<ui:insert name="wrapper-end"/>
+        		
+        <ui:fragment rendered="true" >
+            <!-- controlsidebar component, can't be a composite component because of multiple ui:insert and can't be an external xhtml because myfaces will not propagete ui:params and child pages will not be able to define inserted regions -->
+            <h:form prependId="false">
+                <h:panelGroup id="controlsidebarPanel" layout="block" 
+                	styleClass="hidden-sm hidden-xs">
+                    <ui:insert name="before-controlsidebar-content"/>
+                    
+                    <aside class="control-sidebar control-sidebar-dark">
+                        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                            <li class="active">
+                                <a href="#control-sidebar-theme-demo-options-tab" data-toggle="tab">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                            </li>
+                            <ui:insert name="controlsidebar-tabs"/>
+                        </ul>
+                        <div class="tab-content">
+                        
+                        	
+                        	
+        					<div id="control-sidebar-theme-demo-options-tab" class="tab-pane active">
+        					     <ui:insert name="before-controlsidebar"/>
+        					     				        						
+        						<div style="display:none;" >
+        							<!-- NO BORRAMOS ESTE CONTENIDO PORQUE HAY SCRIPTS JS que NECESITAN LEER ALGUNOS COMPONENTES DE ACA  -->
+        							<h4 class="control-sidebar-heading">#{adm['controlsidebar.header']}</h4>
+                                    <div class="form-group">
+                                            <span class="control-sidebar-subheading">
+                                                <p:outputLabel id="toggle-menu-layout-label" value="#{adm['controlsidebar.label.menu-horientation']}" for="toggle-menu-layout"/>
+                                                <p:selectBooleanCheckbox value="false" id="toggle-menu-layout" styleClass="pull-right black" widgetVar="toggleLayout">
+                                                    <p:ajax update="@none" global="false" oncomplete="updateTemplate()"/>
+                                                </p:selectBooleanCheckbox>
+                                                 <p:remoteCommand name="updateTemplate" process="@this" update="@none" global="false" 
+                                                	/>
+                                                <!-- 
+                                                <p:remoteCommand name="updateTemplate" process="@this" update="@none" global="false" 
+                                                	oncomplete="window.location.reload()"/>
+                                                	
+                                                 -->
+                                            </span>
+                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.menu-horientation']}"/></p>
+                                    </div>        							
+                                                       
+
+                                  
+                                    
+                                    <div class="form-group">
+                                            <span class="control-sidebar-subheading">
+                                                <p:outputLabel id="boxed-layout-label" value="#{adm['controlsidebar.label.boxed-layout']}" for="boxed-layout"/>
+                                                <p:selectBooleanCheckbox value="false" id="boxed-layout" widgetVar="boxedLayout" styleClass="pull-right black" >
+                                                    <p:ajax update="@none" global="false" 
+                                                    partialSubmit="true"/>
+                                                </p:selectBooleanCheckbox>
+                                            </span>
+                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.boxed-layout']}"/></p>
+                                    </div>
+                                           
+
+                                    <div class="form-group">
+                                            <span class="control-sidebar-subheading">
+                                                <p:outputLabel id="fixed-layout-label" value="#{adm['controlsidebar.label.fixed-layout']}" for="fixed-layout"/>
+                                                <p:selectBooleanCheckbox value="false" id="fixed-layout" widgetVar="fixedLayout" styleClass="pull-right black">
+                                                    <p:ajax update="@none" global="false" 
+                                                     partialSubmit="true"/>
+                                                </p:selectBooleanCheckbox>
+                                            </span>
+                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.fixed-layout']}"/></p>
+                                    </div>      
+                                    
+                                    <div class="form-group">
+                                            <span class="control-sidebar-subheading">
+                                                <p:outputLabel id="sidebar-collapsed-label" value="#{adm['controlsidebar.label.sidebar-collapsed']}" for="sidebar-collapsed"/>
+                                                <p:selectBooleanCheckbox value="false" disabled="false" id="sidebar-collapsed" widgetVar="sidebarCollapsed" styleClass="pull-right black" >
+                                                    <p:ajax update="@none" global="false" 
+                                                     partialSubmit="true"/>
+                                                </p:selectBooleanCheckbox>
+                                            </span>
+                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.sidebar-collapsed']}"/></p>
+                                    </div>
+                                                
+                                    <div class="form-group">
+                                            <span class="control-sidebar-subheading">
+                                                <p:outputLabel id="sidebar-expand-hover-label" value="#{adm['controlsidebar.label.sidebar-expand-hover']}" for="sidebar-expand-hover"/>
+                                                <p:selectBooleanCheckbox value="false" disabled="false" id="sidebar-expand-hover" widgetVar="sidebarExpand" styleClass="pull-right black" >
+                                                    <p:ajax update="@none" global="false" partialSubmit="true"/>
+                                                </p:selectBooleanCheckbox>
+                                            </span>
+                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.sidebar-expand-hover']}"/></p>
+                                    </div>
+                                    <div class="form-group">
+                                            <span class="control-sidebar-subheading">
+                                                <p:outputLabel id="control-sidebar-toggle-label" value="#{adm['controlsidebar.label.sidebar-slide']}" for="control-sidebar-toggle"/>
+                                                <p:selectBooleanCheckbox value="false" id="control-sidebar-toggle" widgetVar="fixedControlSidebar" styleClass="pull-right black" >
+                                                    <p:ajax update="@none" global="false"  partialSubmit="true"/>
+                                                </p:selectBooleanCheckbox>
+                                            </span>
+                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.sidebar-slide']}"/></p>
+                                    </div>
+                                    <div class="form-group">
+                                            <span class="control-sidebar-subheading">
+                                                <p:outputLabel value="#{adm['controlsidebar.label.sidebar-skin']}" for="sidebar-skin"/>
+                                                <p:selectBooleanCheckbox value="false" id="sidebar-skin" widgetVar="controlSidebarSkin" styleClass="pull-right black">
+                                                    <p:ajax update="@none" global="false"  partialSubmit="true"/>
+                                                </p:selectBooleanCheckbox>
+                                            </span>
+                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.sidebar-skin']}"/></p>
+                                    </div>
+                                                                                                                							
+        						</div>
+                              					
+        					</div>
+
+                                    
+                            <ui:insert name="controlsidebar-content"/>
+
+                        </div>
+                    </aside>
+                    <ui:insert name="after-controlsidebar-content"/>
+                    <div class="control-sidebar-bg"></div>
+
+                    <script type="text/javascript">
+                        /*<![CDATA[*/
+                        function replaceSkinWith(newSkin) {
+                            $('.skin-link').each(function () {
+                                $(this).addClass('full-opacity-hover');
+                            });
+                            $('#btn-' + newSkin).removeClass('full-opacity-hover');
+                            var cl = $('body').attr("class").split(" ");
+                            for (var i = 0; i < cl.length; i++) {
+                                if (cl[i].startsWith('skin-')) {
+                                    $('body').removeClass(cl[i])
+                                }
+                            }
+                            $('body').addClass(newSkin);
+                            if (typeof (Storage) !== 'undefined') {
+                                localStorage.setItem('layout.skin', newSkin)
+                            }
+                        }
+
+                        /* ]]>*/
+                    </script>
+                </h:panelGroup>
+            </h:form>
+        </ui:fragment>        		
 			<!-- 
 			<h:form>
 				<p:remoteCommand name="clearBreadCrumbs" acíionLisíener="#{breadCrumbNB.clear}" process="@íhis" upda
 			</h:form>
 			-->
-		</div>
-		
+						
+		</div>		
+	    <ui:insert name="after-wrapper"/>			
 		<p:importConstants type="pe.jaav.sistemas.seguridadweb.util.Constant" var="constant" />
 		
-		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-		<h:outputScript library="js" name="bootstrap.min.js" target="head"/>
-		<h:outputScript library="js" name="admin-lte.min.js" target="head"/>
-		<h:outputScript library="js" name="admintemplate.js" target="head"/>
+		<!-- SCRITPS JS -->
+		
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/prism.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/showcase.js"></script>
+		
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/bootstrap.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/admin-lte.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/admintemplate.js"></script>
+		
+		<!-- slide in/out menu integration  -->		
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/slideout.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/adminslide.js"></script>
+		
+		<!-- Scritys Vinculado al Slide Left (MENU) -->
+		<!--
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/control-sidebar.js"></script>
+		-->
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/slimscroll.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/js/admin-lte/showcase.js"></script>
+		 
+		<!-- 		
+		<h:outputScript library="js" name="prism.js" target="head"/>
+        <h:outputScript library="js" name="showcase.js" target="head"/>
+        
+        <h:outputScript library="js" name="bootstrap.min.js" target="head"/>    
+	    <h:outputScript library="js" name="admin-lte.min.js" target="head"/>
+	    <h:outputScript library="js" name="admintemplate.js" target="head"/>
+	    
+	    <h:outputScript library="js" name="slideout.min.js" target="head" rendered="true"/>
+	    <h:outputScript library="js" name="adminslide.js" target="head" rendered="true"/>
+	    <h:outputScript library="js" name="control-sidebar.js" target="head" rendered="true"/>
+	    <h:outputScript library="js" name="slimscroll.min.js" target="head"/>            
+ 		-->        
+		<!-- 
+   		 <adm:ripple/>
+ 		-->
+	    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+	    
+
+	    
+	    <script type="text/javascript">
+	        $(window).scroll(function () {
+	            if (isMobile()) {
+	                var minScrollTimeNav = 300;
+	                var now = new Date().getTime();
+	                if (!scrollTimerNav) {
+	                    if (now - lastScrollFireTimeNav > (3 * minScrollTimeNav)) {
+	                        activateAutoShowNavbarOnScrollUp();   // fire immediately on first scroll
+	                        lastScrollFireTimeNav = now;
+	                    }
+	                    scrollTimerNav = setTimeout(function () {
+	                        scrollTimerNav = null;
+	                        lastScrollFireTimeNav = new Date().getTime();
+	                        activateAutoShowNavbarOnScrollUp();
+	                    }, minScrollTimeNav);
+	                }
+	            }
+	        });
+        	    
+	        if (isMobile()) {
+	            window.onscroll = activateScrollToTop;
+	        }
+
+	        
+	    </script>	    
 	</h:body>
 </f:view>
 </HTML>
- 

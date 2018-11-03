@@ -3,18 +3,32 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
                 template="/templates/TemplateMain.xhtml">
 
 	<style type="text/css">
-			.ui-widget-content {
-					    border: 1px solid rgba(192, 192, 192, 0.47);
-					    color: #000000;
-					    background-color: white;
-			}	
+		
 	</style>
 
     <ui:define name="head">
+    	<!-- 
+        <h:outputStylesheet library="css" name="showcase.css"/>
+        <h:outputStylesheet library="css" name="prism.css"/>
+        -->
+       <link rel="shortcut icon" type="image/x-icon" href="#{resource['favicon/favicon-16x16.png']}" sizes="16x16"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['favicon/favicon-32x32.png']}" sizes="32x32"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['favicon/favicon-96x96.png']}" sizes="96x96"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['favicon/favicon-144x144.png']}" sizes="144x144"/>
+        <link rel="manifest" href="manifest.json"/>
+        <!-- See https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android -->
+        <meta name="theme-color" content="#444"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <f:loadBundle var="theme" basename="admin-theme"/>
         <title>#{paramsys.TITLE}</title>
+    </ui:define>
+    
+    <ui:define name="head">
+        
     </ui:define>
 
     <ui:define name="logo-lg">
@@ -43,28 +57,103 @@
     </ui:define>
 
 	<ui:define name="content-header" >
-				
+		<div class="col-md-12"  style="padding-right: 0px; padding-left: 0px;" >
+        	<div class="ui-g">
+            	<div class="ui-g-8 ui-g-nopad">
+            		<div class="ui-fluid">               
+							<h:form id="FormHeader">		
+							<ul class="breadcrumb" style="margin-bottom: 0px;">
+											
+								<li><a 
+									href="#{facesContext.externalContext.requestContextPath}#{paramsys.PAR_PAGININA_DEFAULT}"
+									
+									class="estiloLabelForm" onclick="clearBreadCrumbs();"> <i
+										class="fa fa-home"></i> #{paramsys.PAR_OPCION_INICIO}
+									</a>
+								</li>			
+								<ui:insert name="contentBread"></ui:insert>			
+								<ui:insert name="contentBreadRegistro"></ui:insert>
+									
+							</ul>
+							</h:form>					
+							            		
+            		</div>
+            	</div>	  
+            	<div class="ui-g-4 ui-g-nopad" align="right" >
+            		<div class="ui-fluid">
+							<ul class="breadcrumb" style="margin-bottom: 0px;">
+								<li><a href="#" class="estiloLabelForm"> <i
+										class="fa fa-calendar-plus-o"></i>
+										#{panelPrincipalMBean.lbFechaPrincipal}
+								</a></li>	
+							</ul>            		
+            		</div>
+            	</div>	            	      	
+        	</div>	
+		</div>			
 	</ui:define>
 	
 	<ui:define name="content-begin" >
-		<h:form id="FormHeader">			
-			<ul class="breadcrumb" style="margin-bottom: 0px;">
-				<li><a href="#" class="estiloLabelForm"> <i
-						class="fa fa-calendar-plus-o"></i>
-						#{panelPrincipalMBean.lbFechaPrincipal}
-				</a></li>			
-				<li><a href="#{facesContext.externalContext.requestContextPath}#{paramsys.PAR_PAGININA_DEFAULT}"
-					class="estiloLabelForm" onclick="clearBreadCrumbs();"> <i
-						class="fa fa-home"></i> #{paramsys.PAR_OPCION_INICIO}
-					</a>
-				</li>			
-				<ui:insert name="contentBread"></ui:insert>				
-			</ul>			
-		</h:form>
+
 	</ui:define>
 	
-	<ui:define name="body" >    	   	 	
-    	<ui:insert  name="contentEspecifico"></ui:insert>
+	<ui:define name="body"  >
+		<style type="text/css">
+			.ui-widget-content {
+					    border: 1px solid rgba(192, 192, 192, 0.47);					    
+					    background-color: white;
+			}	
+			
+			/**MODIFICACION AL FIELD SET*/
+			body fieldset.ui-fieldset legend.ui-fieldset-legend {
+			    background: #3c8dbc;
+			    border-color: #e2e2e2;
+			    color: white;
+			    padding-top: 1px;
+			    padding-bottom: 1px;
+			    margin-bottom: 5px;
+			    font-size: 17px;
+			}
+			
+			/**MODIFICACION AL PANEL HEADER*/
+			.ui-panel.ui-widget .ui-panel-titlebar {
+			    border-width: 0 0 1px 0;
+			    /* padding: .1em; */
+			    padding-top: 1px;
+			    padding-bottom: 1px;
+			    font-weight: bold;
+			}		
+			
+			/**MODIFICACION AL SELECTED (Menus, grillas etc) */
+			.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight, .form-control .ui-state-highlight {
+			    color: #fff;
+			    text-decoration: none;
+			    border-color: #97ccef;
+			    background-color: #97ccef;
+			    background-position: 0;
+			    background-image: -moz-linear-gradient(top, #337ab794, #337ab794);
+			    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#337ab794), to(#337ab794));
+			    background-image: -webkit-linear-gradient(top, #337ab794, #337ab794);
+			    background-image: -o-linear-gradient(top, #337ab794, #337ab794);
+			    background-image: linear-gradient(to bottom, #337ab794, #337ab794);
+			    background-repeat: repeat-x;
+			    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#337ab794', GradientType=0);
+			}		
+				
+			/**MODIFICACION AL GROWL */
+			/*
+			.ui-growl {
+			    position:absolute;
+			    top:10%;
+			    left:80% !important;
+			    z-index:9999;
+			}	
+			*/		
+		</style>	
+	
+		<div  style="background-color: white;" >
+			<ui:insert  name="contentEspecifico"></ui:insert>		
+		</div>    		 
     </ui:define>
 
 
@@ -76,7 +165,39 @@
         <div class="pull-right hidden-xs" style="color: gray">
             <i>#{paramsys.VERSION} </i>
         </div>
+    
     </ui:define>
 
+    <!-- below is just an example on how to define more tabs for control sidebar --> 
+    <ui:define name="controlsidebar-tabs">
+        <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ui:define>
+    
+	<ui:insert name="before-controlsidebar"/>
+	
+	<!-- ################################################################### -->
+	<!--  SECCION DERECHA -->
+	<!-- ################################################################### -->
+	<ui:define name="before-controlsidebar">	
+        <!-- PROPIO -->
+        <ui:include src="/includes/right-conten-config-inicial.xhtml"/>	
+    </ui:define>
+    
+    <ui:define name="controlsidebar-content">
+    	<!-- EJEMPLO -->
+    	<!-- 
+        <ui:include src="/includes/controlsidebar-tabs-content.xhtml"/>
+         -->
+        <!-- PROPIO -->
+        <ui:include src="/includes/right-conten-config.xhtml"/>
+    </ui:define>
+	<!-- ################################################################### -->
+	<!-- ################################################################### -->
+		
+		
+    <ui:define name="after-wrapper">
+
+    </ui:define>
 
 </ui:composition>

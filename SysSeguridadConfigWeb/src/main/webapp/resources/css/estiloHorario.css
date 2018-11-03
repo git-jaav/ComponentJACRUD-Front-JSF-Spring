@@ -1,0 +1,262 @@
+.estiloSinSombreado .fc-today {
+	background: transparent;
+	border: none !important;
+	border-top: 1px solid #ddd !important;
+	font-weight: bold;
+	box-shadow: none;
+}
+
+.estiloSinSombreado .fc-content {
+	font-size: 9px;
+}
+
+.formaCirculo {
+	width: 18px;
+	height: 18px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+}
+
+.selectedEnabled {
+	
+}
+
+.selectedDisabled {
+	pointer-events: none;
+	cursor: default;
+}
+
+.selectedDisabledMenuItem {
+	pointer-events: none;
+	cursor: default;
+	background: transparent !important;
+	color: black !important;
+	font-weight: bold !important;
+}
+ 
+.colorSelected {
+	background: #F1DC39;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.color1 {
+	background: #D1C4E9;
+	color: black;
+}
+
+.color2 {
+	background: #C6FF00;
+	color: black;
+}
+
+.color3 {
+	background: #BBDEFB;
+	color: black;
+}
+
+.color4 {
+	background: #0feca6;
+	color: black;
+}
+
+.color5 {
+	background: #7C4DFF;
+	color: black;
+}
+
+.color6 {
+	background: #FFECB3;
+	color: black;
+}
+
+.color7 {
+	background: #FFCC80;
+	color: black;
+}
+
+.color8 {
+	background: #FFCCBC;
+	color: black;
+}
+
+.color9 {
+	background: #CFD8DC;
+	color: black;
+}
+
+.color10 {
+	background: #82B1FF;
+	color: black;
+}
+
+.color11 {
+	background: #A7FFEB;
+	color: black;
+}
+
+.color12 {
+	background: #8C9EFF;
+	color: black;
+}
+
+.color13 {
+	background: #B388FF;
+	color: black;
+}
+
+.color14 {
+	background: #F4FF81;
+	color: black;
+}
+
+.color15 {
+	background: #CCFF90;
+	color: black;
+}
+
+.color16 {
+	background: #7d26cd;
+	color: black;
+}
+
+.color17 {
+	background: #25a8ae;
+	color: black;
+}
+
+.color18 {
+	background: #C5CAE9;
+	color: black;
+}
+
+.color19 {
+	background: #B2FF59;
+	color: black;
+}
+
+.color20 {
+	background: #00E5FF;
+	color: black;
+}
+
+/** COLOR PERSONALIZADO HORARIO **/
+.colorHorasExcedido {
+	background-color: #2196F3;
+	color: black;
+}
+
+.colorFeriado {
+	background-color: #ff4444;
+	color: black;
+}
+
+.colorReunion {
+	background: #ae773f;
+	color: black;
+}
+
+.colorReceso {
+	background: #ffd700;
+	color: black;
+}
+
+.colorUpdateHorario {
+	background: #18ce73;
+	color: black;
+}
+
+.colorEstadoPendiente {
+	font-weight: bold;
+	color: #e59400 !important;
+}
+
+.colorEstadoAprobado {
+	font-weight: bold;
+	color: #219f4f !important;
+}
+
+.colorEstadoAnulado {
+	font-weight: bold;
+	color: #9f2132 !important;
+}
+
+.colorEstadoReprogramado {
+	font-weight: bold;
+	color: #21719F !important;
+}
+
+/*** HORARIO - CURSO **/
+.colorCursoAgregado {
+	width: 18px;
+	height: 18px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	background-color: #219f4f;
+	border: 1px solid #219f4f;
+}
+
+.colorCursoNoAgregado {
+	width: 18px;
+	height: 18px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	background-color: #9f2132;
+	border: 1px solid #9f2132;
+}
+
+/** HORARIO **/
+.fc-title {
+	color: black;
+}
+
+.fc-time {
+	color: black;
+}
+
+.styleBreak {
+	background: #FAFCBE;
+}
+
+.styleEvent1 {
+	background: #CEECF5;
+}
+
+.styleEvent2 {
+	background: #C1D0FB;
+}
+
+.styleEvent3 {
+	background: #DAB9F9;
+}
+
+.styleEvent4 {
+	background: #FCE0F5;
+}
+
+.styleEvent5 {
+	background: #E6E3E6;
+}
+
+.styleEvent6 {
+	background: #FDDFD4;
+}
+
+.styleEvent7 {
+	background: #FCD3A8;
+}
+
+.styleEvent8 {
+	background: #D9FCCD;
+}
+
+.styleEvent9 {
+	background: #FFCACA;
+}
+
+.styleEvent10 {
+	background: #F5DA81;
+}

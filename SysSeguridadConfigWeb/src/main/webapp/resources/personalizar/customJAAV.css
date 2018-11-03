@@ -4,6 +4,7 @@
 	ahora	#00A65A
 */
 
+/*
 .ui-datatable-odd {
 	background: #ffffff;
 }
@@ -39,6 +40,9 @@
 .input-width-small{
 	width: 20% !important;
 }	
+
+*/
+
 .footer-custom {
 	font-style:italic;
 	margin-bottom: 20px;
@@ -95,6 +99,7 @@
 	background-color: pink !important;
 }
 
+/*
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.focus,
@@ -135,7 +140,7 @@ fieldset[disabled] .btn-primary.active {
   color: #0967b8;
   background-color: #fff;
 }	
-
+*/
 
 .colTableStyleBlue01 .ui-selectonemenu-label{
 	font-weight:bold;	
@@ -174,71 +179,6 @@ fieldset[disabled] .btn-primary.active {
 /*AGREGACIONES PORTAL*/
 /** BOTONES **/
 
-
-.btnRSCancel {
-  color: #fff;
-  display: inline-block;
-  padding: 2px 6px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-	background: #0081c2; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#0081c2, #096B9C); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#0081c2,  #096B9C); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#0081c2,  #096B9C); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#0081c2,  #096B9C); /* Standard syntax */  
-}
-
-.btnRSAcept {
-  color: #fff;
-  display: inline-block;
-  padding: 2px 6px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-	background: #02D581; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#02D581, #03E68B); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#02D581, #03E68B); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#02D581, #03E68B); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#02D581, #03E68B); /* Standard syntax */  
-}
-.btn-primaryRS {
-  	color: #fff;
-	border:1px solid #e93737;
-	background: #02D581; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#02D581, #03E68B); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#02D581, #03E68B); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#02D581, #03E68B); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#02D581, #03E68B); /* Standard syntax */
-}
 		
 	
 	
@@ -354,7 +294,7 @@ fieldset[disabled] .btn-primary.active {
 		    line-height: 1px;
 		    background-color: #d2d6de;
 		}	
-		
+		/*
 		.ui-datatable table {
 			border-collapse: collapse !important;
 			width: 100% !important;
@@ -383,7 +323,7 @@ fieldset[disabled] .btn-primary.active {
 	        padding-right: 1em;
 	        padding-bottom: 0.6em;
 	        padding-left: 1em;
-	}		
+	}		*/
 
 	
 .colorgraph {
@@ -397,6 +337,7 @@ fieldset[disabled] .btn-primary.active {
     background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }	
 
+/*
 .ui-dialog.ui-widget-content .ui-dialog-title {
 	font-size: 16px;
 }
@@ -424,7 +365,7 @@ fieldset[disabled] .btn-primary.active {
 .menuSelected {
     background-color: #00E67E;
 }
-
+*/
 .estiloLabelForm{
 	font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
 	font-style: normal ;
